@@ -42,7 +42,7 @@ required JAR files in your classpath):
 ```java
 import javax.inject.Inject;
 import javafx.fxml.FXMLLoader;
-import static javafx.stage.Stage;
+import javafx.stage.Stage;
 import com.cathive.fx.cdi.WeldApplication;
 import com.cathive.fx.cdi.FXMLLoaderParams;
 
@@ -52,7 +52,7 @@ public class MyApplication extends WeldApplication {
     @FXMLLoaderParams(resources = "my.example.app.Stage.fxml")
     private FXMLLoader fxmlLoader;
 
-    public void start(final Stage stage) throws java.lang.Exception {
+    public void start(final Stage primaryStage) throws java.lang.Exception {
 
         // ...
         // Use the FXMLLoader instance to load your stuff.
