@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ Copyright (C) 2013 The Cat Hive Developers.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.cathive.fx</groupId>
+    <artifactId>com.cathive.fx.cdi</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>CDI integration for JavaFX</name>
+    <description>Context And Dependency Injection (CDI) and JavaFX using JBoss WELD</description>
+    <url>https://github.com/cathive/fx-cdi/</url>
+    <inceptionYear>2013</inceptionYear>
+
+    <parent>
+        <groupId>com.cathive</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>3</version>
+    </parent>
+
+    <modules/>
+
+    <properties>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <prerequisites>
+        <maven>3.1.1</maven>
+    </prerequisites>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+            <comments/>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/cathive/fx-cdi/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>headcr4sh</id>
+            <name>Benjamin P. Jung</name>
+            <email>headcr4sh@gmail.com</email>
+            <url>http://profiles.google.com/headcr4sh</url>
+            <timezone>Europe/Berlin</timezone>
+            <properties>
+                <github.username>headcr4sh</github.username>
+            </properties>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <contributors/>
+
+    <scm>
+        <connection>scm:git:https://github.com/cathive/fx-cdi.git</connection>
+        <developerConnection>scm:git:git@github.com:cathive/fx-cdi.git</developerConnection>
+        <url>https://github.com/cathive/fx-cdi/</url>
+        <tag>master</tag>
+    </scm>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/cathive/fx-cdi/</url>
+    </ciManagement>
+
+    <dependencies>
+
+        <!-- API -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.1</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>false</optional>
+        </dependency>
+
+        <!-- Implementation -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se</artifactId>
+            <version>2.1.1.Final</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Unit tests -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+
+        <dependencies/>
+
+    </dependencyManagement>
+
+</project>
