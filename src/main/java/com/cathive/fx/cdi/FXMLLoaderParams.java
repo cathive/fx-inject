@@ -60,6 +60,7 @@ public @interface FXMLLoaderParams {
      *         The location used to resolve relative path attribute values.
      * @see javafx.fxml.FXMLLoader#setLocation(java.net.URL)
      */
+    @Nonbinding
     public String location() default LOCATION_UNSPECIFIED;
 
     /**
@@ -68,6 +69,7 @@ public @interface FXMLLoaderParams {
      *         The resources used to resolve resource key attribute values.
      * @see javafx.fxml.FXMLLoader#setResources(java.util.ResourceBundle)
      */
+    @Nonbinding
     public String resources() default RESOURCES_UNSPECIFIED;
 
     /**
@@ -76,6 +78,7 @@ public @interface FXMLLoaderParams {
      *          The charset used by the configured loader.
      * @see javafx.fxml.FXMLLoader#setCharset(java.nio.charset.Charset)
      */
+    @Nonbinding
     public String charset() default CHARSET_UNSPECIFIED;
 
 }
