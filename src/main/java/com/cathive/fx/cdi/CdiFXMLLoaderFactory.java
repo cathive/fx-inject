@@ -35,6 +35,7 @@ import java.util.ResourceBundle;
 class CdiFXMLLoaderFactory {
 
     @Produces
+    @FXMLLoaderParams
     public FXMLLoader createCdiFXMLLoader(final InjectionPoint injectionPoint) {
 
         final Annotated annotated = injectionPoint.getAnnotated();
