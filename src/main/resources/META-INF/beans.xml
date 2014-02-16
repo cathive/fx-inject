@@ -22,8 +22,4 @@ limitations under the License.
        bean-discovery-mode="annotated"
        version="1.1">
 
-        <scan>
-            <exclude name="com.cathive.fx.cdi.FxCdiExtension"/>
-        </scan>
-
 </beans>
