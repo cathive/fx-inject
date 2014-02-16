@@ -31,7 +31,7 @@ import java.util.Set;
  * A simple wrapper class that helps us to get things up and running.
  * @author Benjamin P. Jung
  */
-public class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, PassivationCapable {
+class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, PassivationCapable {
 
     final T instance;
     final Set<Annotation> qualifiers;

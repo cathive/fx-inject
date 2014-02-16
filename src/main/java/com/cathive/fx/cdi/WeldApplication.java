@@ -22,7 +22,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * This class should be extended if you plan to use WELD SE as CDI provider for your
+ * JavaFX applications.
  * @author Benjamin P. Jung
+ * @since 1.0.0
  */
 public abstract class WeldApplication extends CdiApplication {
 
@@ -41,7 +44,7 @@ public abstract class WeldApplication extends CdiApplication {
         logger.log(Level.INFO, "Initializing Weld-based JavaFX appplication: {0}", this.getClass().getName());
 
         // Sets the JavaFX application instance to be used when injecting an instance of this class.
-        FxCdiExtension.setJavaFxApplication(this);
+        CdiExtension.setJavaFxApplication(this);
 
         logger.log(Level.INFO, "Initializing JBoss WELD...");
         this.weld = new Weld();
