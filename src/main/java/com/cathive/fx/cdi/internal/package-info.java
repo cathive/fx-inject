@@ -16,8 +16,7 @@
 
 /**
  * Internal implementation details of the fx-cdi framework.
- * <p>Classes of this package are <em>not</em> part of the public
- * <abbr lang="en" title="Application programming interface">API</abbr>
+ * <p>Classes of this package are <em>not</em> part of the public API
  * and should not be used by application programmers directly!</p>
  */
 
