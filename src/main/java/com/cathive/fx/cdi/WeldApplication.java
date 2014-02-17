@@ -18,6 +18,7 @@ package com.cathive.fx.cdi;
 
 import org.jboss.weld.environment.se.Weld;
 
+import javax.enterprise.inject.spi.CDI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,10 +42,7 @@ public abstract class WeldApplication extends CdiApplication {
     @Override
     public void init() throws Exception {
 
-        logger.log(Level.INFO, "Initializing Weld-based JavaFX appplication: {0}", this.getClass().getName());
-
-        // Sets the JavaFX application instance to be used when injecting an instance of this class.
-        CdiExtension.setJavaFxApplication(this);
+        super.init();
 
         logger.log(Level.INFO, "Initializing JBoss WELD...");
         this.weld = new Weld();

@@ -28,4 +28,15 @@ import javafx.application.Application;
  * @since 1.0.0
  */
 abstract class CdiApplication extends Application {
+
+    @Override
+    public void init() throws Exception {
+
+        super.init();
+
+        // Sets the JavaFX application instance to be used when injecting an instance of this class.
+        FxCdiExtension.setJavaFxApplication(this);
+
+    }
+
 }

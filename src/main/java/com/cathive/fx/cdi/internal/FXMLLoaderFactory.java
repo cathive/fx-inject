@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.cdi;
+package com.cathive.fx.cdi.internal;
 
+import com.cathive.fx.cdi.FXMLLoaderParams;
 import javafx.fxml.FXMLLoader;
 
 import javax.enterprise.inject.Produces;
@@ -29,14 +30,15 @@ import java.nio.charset.Charset;
 import java.util.ResourceBundle;
 
 /**
+ * This factory is responsible for the production of CDI-aware {@link javafx.fxml.FXMLLoader} instances.
  * @author Benjamin P. Jung
  * @since 1.0.0
  */
-class CdiFXMLLoaderFactory {
+class FXMLLoaderFactory {
 
     @Produces
     @FXMLLoaderParams
-    public FXMLLoader createCdiFXMLLoader(final InjectionPoint injectionPoint) {
+    FXMLLoader createCdiFXMLLoader(final InjectionPoint injectionPoint) {
 
         final Annotated annotated = injectionPoint.getAnnotated();
         final Class<?> declaringClass = injectionPoint.getMember().getDeclaringClass();
