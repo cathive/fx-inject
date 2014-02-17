@@ -32,12 +32,12 @@ import java.lang.annotation.Target;
 /**
  * Use this annotation to configure {@link javafx.fxml.FXMLLoader} instances that
  * shall be injected via CDI {@link javax.inject.Inject @Inject} annotations.
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>
  * {@literal @}javax.inject.Inject
  * {@literal @}com.cathive.fx.cdi.FXMLLoaderParams(location = "MyFile.fxml")
  * private FXMLLoader fxmlLoader;
- * </pre></p>
+ * </pre>
  *
  * @author Benjamin P. Jung
  * @since 1.0.0
