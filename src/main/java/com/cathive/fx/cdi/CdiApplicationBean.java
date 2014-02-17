@@ -22,6 +22,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.*;
 import javax.enterprise.util.AnnotationLiteral;
+import javax.inject.Scope;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
@@ -32,6 +33,9 @@ import java.util.Set;
  * @author Benjamin P. Jung
  */
 class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, PassivationCapable {
+
+    /** The scope to be used for our JavaFX application instance. */
+    static final Class<? extends Annotation> SCOPE = ApplicationScoped.class;
 
     final T instance;
     final Set<Annotation> qualifiers;
@@ -56,7 +60,7 @@ class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, Passivati
 
     @Override
     public Class<?> getBeanClass() {
-        return instance.getClass();
+        return this.instance.getClass();
     }
 
     @Override
@@ -81,7 +85,7 @@ class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, Passivati
 
     @Override
     public Class<? extends Annotation> getScope() {
-        return ApplicationScoped.class;
+        return SCOPE;
     }
 
     @Override
@@ -113,4 +117,5 @@ class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, Passivati
     public String getId() {
         return this.instance.getClass().getName();
     }
+
 }
