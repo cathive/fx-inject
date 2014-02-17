@@ -22,7 +22,7 @@ limitations under the License.
     <groupId>com.cathive.fx</groupId>
     <artifactId>com.cathive.fx.cdi</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>CDI integration for JavaFX</name>
     <description>Context And Dependency Injection (CDI) and JavaFX using JBoss WELD</description>
     <url>https://github.com/cathive/fx-cdi/</url>
@@ -82,7 +82,7 @@ limitations under the License.
         <connection>scm:git:https://github.com/cathive/fx-cdi.git</connection>
         <developerConnection>scm:git:git@github.com:cathive/fx-cdi.git</developerConnection>
         <url>https://github.com/cathive/fx-cdi/</url>
-        <tag>v1.0.0</tag>
+        <tag>master</tag>
     </scm>
 
     <ciManagement>
