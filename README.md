@@ -48,8 +48,14 @@ import com.cathive.fx.cdi.FXMLLoaderParams;
 
 public class MyApplication extends WeldApplication {
 
+    // The following annotation will inject an FXMLLoader instance
+    // that has been pre-configured to load a given FXML file and
+    // uses a properties file for localization.
+
     @Inject
-    @FXMLLoaderParams(resources = "my.example.app.Stage.fxml")
+    @FXMLLoaderParams(
+            resources = "/my/example/app/Stage.fxml",
+            messages = "/my/example/app/Messages")
     private FXMLLoader fxmlLoader;
 
     public void start(final Stage primaryStage) throws java.lang.Exception {
