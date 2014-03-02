@@ -1,8 +1,11 @@
 package com.cathive.fx.cdi;
 
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.testng.annotations.Test;
@@ -54,8 +57,9 @@ public class WeldApplicationTest extends WeldApplication {
         launch();
         try {
             canExecuteTest.acquire();
-            assertThat(uut.getHeight(), is(129.0));
-            assertThat(uut.getWidth(), is(102.0));
+            ObservableList<Node> sceneContent = uut.getScene().getRoot().getChildrenUnmodifiable();
+            Button firstButton = (Button) sceneContent.get(0);
+            assertThat(firstButton.getText(), is("Weld App"));
         } catch (InterruptedException e) {
             fail("Could not execute testInit ");
         } finally {
