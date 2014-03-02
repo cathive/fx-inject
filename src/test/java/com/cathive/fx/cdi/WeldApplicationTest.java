@@ -1,6 +1,7 @@
 package com.cathive.fx.cdi;
 
 
+import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,7 +14,10 @@ import org.testng.annotations.Test;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,21 +34,9 @@ import static org.testng.Assert.*;
 public class WeldApplicationTest extends WeldApplication {
 
     private static Stage uut;
-
-    /**
-     * Will track the setup of the fx application.
-     * <p>
-     * <p>
-     * First acquired on test startup
-     * first released on UI creation.
-     * <p>
-     * Second acquire on test run
-     * Second release on test finish.
-     * <p>
-     * Third acquire on fx HUI hide.
-     * Third release on leaving the fx app thread.
-     */
-    private static Semaphore canExecuteTest = new Semaphore(1);
+    private static final Lock lock = new ReentrantLock();
+    private static final Condition isUIInitialized = lock.newCondition();
+    private static final Condition hasTestFinished = lock.newCondition();
 
     @Inject
     @FXMLLoaderParams()
@@ -52,39 +44,39 @@ public class WeldApplicationTest extends WeldApplication {
 
     @Test
     public void testInit() throws Exception {
+        lock.lock();
         assertNull(FxCdiExtension.getJavaFxApplication());
-        canExecuteTest.acquire();
-        launch();
+        Executors.newCachedThreadPool().execute(Application::launch);
         try {
-            canExecuteTest.acquire();
+            isUIInitialized.await();
             ObservableList<Node> sceneContent = uut.getScene().getRoot().getChildrenUnmodifiable();
             Button firstButton = (Button) sceneContent.get(0);
             assertThat(firstButton.getText(), is("Weld App"));
         } catch (InterruptedException e) {
             fail("Could not execute testInit ");
         } finally {
-            canExecuteTest.release();  // wo wouldn't want to leave any semaphores open, would we?
+            hasTestFinished.signal();
+            lock.unlock();
         }
         assertNotNull(FxCdiExtension.getJavaFxApplication());
     }
 
-
     @Override
     public void start(Stage stage) {
         URL resource = WeldApplicationTest.class.getResource("weldApplicationTest.fxml");
+        lock.lock();
         try {
             AnchorPane pane = FXMLLoader.load(resource);
             stage.setScene(new Scene(pane));
             uut = stage;
             uut.show();
-            canExecuteTest.release(); // test execution can now resume
-            canExecuteTest.acquire(); // wait for the current test to finish
+            isUIInitialized.signalAll();
+            hasTestFinished.await();
             uut.hide();
         } catch (IOException | InterruptedException e) {
             fail("Could not initialize FX application");
         } finally {
-            canExecuteTest.release(); // wo wouldn't want to leave any semaphores open, would we?
+            lock.unlock();
         }
     }
-
 }
