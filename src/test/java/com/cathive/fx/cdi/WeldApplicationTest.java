@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -39,7 +38,7 @@ public class WeldApplicationTest extends WeldApplication {
     private static final Condition hasTestFinished = lock.newCondition();
 
     @Inject
-    @FXMLLoaderParams()
+    @FXMLLoaderParams(location = "weldApplicationTest.fxml")
     private FXMLLoader fxmlLoader;
 
     @Test
@@ -62,11 +61,10 @@ public class WeldApplicationTest extends WeldApplication {
     }
 
     @Override
-    public void start(Stage stage) {
-        URL resource = WeldApplicationTest.class.getResource("weldApplicationTest.fxml");
+    public void start(final Stage stage) {
         lock.lock();
         try {
-            AnchorPane pane = FXMLLoader.load(resource);
+            AnchorPane pane = this.fxmlLoader.load();
             stage.setScene(new Scene(pane));
             uut = stage;
             uut.show();
@@ -74,7 +72,7 @@ public class WeldApplicationTest extends WeldApplication {
             hasTestFinished.await();
             uut.hide();
         } catch (IOException | InterruptedException e) {
-            fail("Could not initialize FX application");
+            fail("Could not initialize JavaFX application");
         } finally {
             lock.unlock();
         }
