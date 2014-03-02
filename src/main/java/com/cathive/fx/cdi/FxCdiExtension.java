@@ -81,7 +81,7 @@ public class FxCdiExtension implements Extension {
 
     }
 
-    <T> void processAnnotatedType(final @Observes ProcessAnnotatedType<? extends Application> pat, final BeanManager beanManager) {
+    void processAnnotatedType(final @Observes ProcessAnnotatedType<? extends Application> pat, final BeanManager beanManager) {
         final Class<? extends Application> javaClass = pat.getAnnotatedType().getJavaClass();
         if (javaClass.equals(JAVA_FX_APPLICATION.getClass())) {
             // We veto any sub-classes of CdiApplication to make sure, that the right bean
