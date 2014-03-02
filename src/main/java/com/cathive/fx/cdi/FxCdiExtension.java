@@ -143,7 +143,7 @@ public class FxCdiExtension implements Extension {
 
             this.instance = instance;
 
-            this.qualifiers = new HashSet<Annotation>();
+            this.qualifiers = new HashSet<>();
             this.qualifiers.add(new AnnotationLiteral<Any>() {});
             this.qualifiers.add(new AnnotationLiteral<Default>() {});
 
