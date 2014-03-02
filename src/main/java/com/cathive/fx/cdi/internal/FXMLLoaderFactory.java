@@ -23,8 +23,6 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.inject.spi.InjectionPoint;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ResourceBundle;
@@ -60,7 +58,11 @@ class FXMLLoaderFactory {
             // class loader to create an URL that points to a FXML file on the classpath.
             final String location = fxmlLoaderParams.location();
             if (! location.equals(FXMLLoaderParams.LOCATION_UNSPECIFIED)) {
-                loader.setLocation(declaringClass.getResource(location));
+                final URL locationUrl = declaringClass.getResource(location);
+                if (locationUrl == null) {
+                    throw new IllegalArgumentException(String.format("Couldn't find FXML file: \"%s\".", location));
+                }
+                loader.setLocation(locationUrl);
             }
 
             final String charset = fxmlLoaderParams.charset();
