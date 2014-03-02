@@ -49,4 +49,12 @@ public abstract class WeldApplication extends CdiApplication {
 
     }
 
+    @Override
+    public void stop() throws Exception {
+        if (this.weld != null) {
+            this.weld.shutdown();
+        }
+        super.stop();
+    }
+
 }
