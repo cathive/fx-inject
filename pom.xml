@@ -37,9 +37,21 @@ limitations under the License.
     <modules />
 
     <properties>
+
+        <!-- Maven compiler settings -->
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- CDI API -->
+        <cdi-api.version>1.1</cdi-api.version>
+
+        <!-- CDI implementation: JBoss WELD -->
+        <weld.version>2.1.2.Final</weld.version>
+
+        <!-- CDI implementation: Apache OpenWebBeans -->
+        <openwebbeans.version>1.2.2</openwebbeans.version>
+
     </properties>
 
     <prerequisites>
@@ -92,21 +104,39 @@ limitations under the License.
 
     <dependencies>
 
-        <!-- API -->
+        <!-- CDI API -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>1.1</version>
+            <version>${cdi-api.version}</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>false</optional>
         </dependency>
 
-        <!-- Implementation -->
+        <!-- CDI implementation: JBoss WELD -->
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se</artifactId>
-            <version>2.1.2.Final</version>
+            <version>${weld.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- CDI implementation: Apache OpenWebBeans -->
+        <dependency>
+            <groupId>org.apache.openwebbeans</groupId>
+            <artifactId>openwebbeans-spi</artifactId>
+            <version>${openwebbeans.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openwebbeans</groupId>
+            <artifactId>openwebbeans-impl</artifactId>
+            <version>${openwebbeans.version}</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
