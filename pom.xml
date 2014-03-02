@@ -24,7 +24,7 @@ limitations under the License.
     <packaging>jar</packaging>
     <version>1.0.1-SNAPSHOT</version>
     <name>CDI integration for JavaFX</name>
-    <description>Context And Dependency Injection (CDI) and JavaFX using JBoss WELD</description>
+    <description>Context And Dependency Injection (CDI) with JavaFX using JBoss WELD</description>
     <url>https://github.com/cathive/fx-cdi/</url>
     <inceptionYear>2013</inceptionYear>
 
