@@ -18,7 +18,6 @@ package com.cathive.fx.cdi;
 
 import org.jboss.weld.environment.se.Weld;
 
-import javax.enterprise.inject.spi.CDI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
