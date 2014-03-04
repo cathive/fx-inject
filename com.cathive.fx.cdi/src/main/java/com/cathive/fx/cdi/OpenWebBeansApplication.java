@@ -2,7 +2,6 @@ package com.cathive.fx.cdi;
 
 import org.apache.webbeans.config.WebBeansContext;
 import org.apache.webbeans.spi.ContainerLifecycle;
-import org.apache.xbean.asm4.ClassReader;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
