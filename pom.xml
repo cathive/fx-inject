@@ -20,8 +20,8 @@ limitations under the License.
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cathive.fx</groupId>
-    <artifactId>com.cathive.fx.cdi</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>com.cathive.fx.cdi.parent</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.1-SNAPSHOT</version>
     <name>CDI integration for JavaFX</name>
     <description>Context And Dependency Injection (CDI) with JavaFX using JBoss WELD</description>
@@ -34,7 +34,9 @@ limitations under the License.
         <version>3</version>
     </parent>
 
-    <modules />
+    <modules >
+        <module>com.cathive.fx.cdi</module>
+    </modules>
 
     <properties>
 
@@ -86,6 +88,18 @@ limitations under the License.
                 <role>Developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>aerben</id>
+            <name>Alexander Erben</name>
+            <email>a_erben@outlook.com</email>
+            <timezone>Europe/Berlin</timezone>
+            <properties>
+                <github.username>aerben</github.username>
+            </properties>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors />
@@ -102,8 +116,9 @@ limitations under the License.
         <url>https://travis-ci.org/cathive/fx-cdi/</url>
     </ciManagement>
 
-    <dependencies>
+    <dependencyManagement>
 
+    <dependencies>
         <!-- CDI API -->
         <dependency>
             <groupId>javax.enterprise</groupId>
@@ -147,13 +162,9 @@ limitations under the License.
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <scope>test</scope>
+            <version></version>
         </dependency>
-
-    </dependencies>
-
-    <dependencyManagement>
-
-        <dependencies />
+        </dependencies>
 
     </dependencyManagement>
 

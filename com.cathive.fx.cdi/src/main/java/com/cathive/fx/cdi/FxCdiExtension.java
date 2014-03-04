@@ -17,7 +17,6 @@
 package com.cathive.fx.cdi;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.spi.CreationalContext;
@@ -30,7 +29,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
