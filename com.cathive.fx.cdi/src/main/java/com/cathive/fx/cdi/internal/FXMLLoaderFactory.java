@@ -42,6 +42,10 @@ class FXMLLoaderFactory {
         final Class<?> declaringClass = injectionPoint.getMember().getDeclaringClass();
 
         final FXMLLoader loader = new FXMLLoader() {
+            @Override
+            public String toString() {
+                return String.format("[CDI-aware] %s", super.toString());
+            }
         };
 
         // Uses the currently loaded CDI implementation to look up controller classes
@@ -51,8 +55,9 @@ class FXMLLoaderFactory {
         // If an annotation of type @FXMLLoaderParams can be found, use it's parameters
         // to configure the FXMLLoader instance that shall be used to perform the loading
         // of the FXML file.
-        final FXMLLoaderParams fxmlLoaderParams = annotated.getAnnotation(FXMLLoaderParams.class);
-        if (fxmlLoaderParams != null) {
+        if (annotated.isAnnotationPresent(FXMLLoaderParams.class)) {
+
+            final FXMLLoaderParams fxmlLoaderParams = annotated.getAnnotation(FXMLLoaderParams.class);
 
             // Checks the location that has been specified (if any) and uses the default
             // class loader to create an URL that points to a FXML file on the classpath.
