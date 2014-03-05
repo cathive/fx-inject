@@ -48,12 +48,6 @@ import java.lang.annotation.Target;
 @Target({ METHOD, FIELD, PARAMETER, TYPE })
 public @interface FXMLLoaderParams {
 
-    // Some marker strings for unspecified values.
-    static final String LOCATION_UNSPECIFIED = "$$$LOCATION_UNSPECIFIED$$$";
-    static final String RESOURCES_UNSPECIFIED = "$$$RESOURCES_UNSPECIFIED$$$";
-    static final String CHARSET_UNSPECIFIED = "$$$CHARSET_UNSPECIFIED$$$";
-
-
     /**
      * Sets the location used to resolve relative path attribute values.
      * @return
@@ -61,7 +55,7 @@ public @interface FXMLLoaderParams {
      * @see javafx.fxml.FXMLLoader#setLocation(java.net.URL)
      */
     @Nonbinding
-    String location() default LOCATION_UNSPECIFIED;
+    String location() default CdiFXMLLoader.LOCATION_UNSPECIFIED;
 
     /**
      * Sets the resources used to resolve resource key attribute values.
@@ -70,7 +64,7 @@ public @interface FXMLLoaderParams {
      * @see javafx.fxml.FXMLLoader#setResources(java.util.ResourceBundle)
      */
     @Nonbinding
-    String resources() default RESOURCES_UNSPECIFIED;
+    String resources() default CdiFXMLLoader.RESOURCES_UNSPECIFIED;
 
     /**
      * Sets the charset used by the configured loader.
@@ -79,6 +73,6 @@ public @interface FXMLLoaderParams {
      * @see javafx.fxml.FXMLLoader#setCharset(java.nio.charset.Charset)
      */
     @Nonbinding
-    String charset() default CHARSET_UNSPECIFIED;
+    String charset() default CdiFXMLLoader.CHARSET_UNSPECIFIED;
 
 }

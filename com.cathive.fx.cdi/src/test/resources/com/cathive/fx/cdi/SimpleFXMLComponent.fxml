@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
 Copyright (C) 2013,2014 The Cat Hive Developers.
@@ -16,14 +16,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
-       bean-discovery-mode="annotated"
-       version="1.1">
+<?import javafx.scene.control.Button?>
 
-    <interceptors>
-        <class>com.cathive.fx.cdi.internal.FXMLComponentInterceptor</class>
-    </interceptors>
-
-</beans>
+<fx:root type="com.cathive.fx.cdi.SimpleFXMLComponent" xmlns:fx="http://javafx.com/fxml" >
+    <text>Hello, World!</text>
+    <hello>true</hello>
+</fx:root>

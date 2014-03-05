@@ -16,16 +16,13 @@
 
 package com.cathive.fx.cdi.internal;
 
+import com.cathive.fx.cdi.CdiFXMLLoader;
 import com.cathive.fx.cdi.FXMLLoaderParams;
 import javafx.fxml.FXMLLoader;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
-import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.inject.spi.InjectionPoint;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ResourceBundle;
 
 /**
  * This factory is responsible for the production of CDI-aware {@link javafx.fxml.FXMLLoader} instances.
@@ -41,48 +38,15 @@ class FXMLLoaderFactory {
         final Annotated annotated = injectionPoint.getAnnotated();
         final Class<?> declaringClass = injectionPoint.getMember().getDeclaringClass();
 
-        final FXMLLoader loader = new FXMLLoader() {
-            @Override
-            public String toString() {
-                return String.format("[CDI-aware] %s", super.toString());
-            }
-        };
-
-        // Uses the currently loaded CDI implementation to look up controller classes
-        // that have been specified via "fx:controller='...'" in our FXML files.
-        loader.setControllerFactory((aClass) -> CDI.current().select(aClass));
-
         // If an annotation of type @FXMLLoaderParams can be found, use it's parameters
         // to configure the FXMLLoader instance that shall be used to perform the loading
         // of the FXML file.
-        if (annotated.isAnnotationPresent(FXMLLoaderParams.class)) {
-
-            final FXMLLoaderParams fxmlLoaderParams = annotated.getAnnotation(FXMLLoaderParams.class);
-
-            // Checks the location that has been specified (if any) and uses the default
-            // class loader to create an URL that points to a FXML file on the classpath.
-            final String location = fxmlLoaderParams.location();
-            if (! location.equals(FXMLLoaderParams.LOCATION_UNSPECIFIED)) {
-                final URL locationUrl = declaringClass.getResource(location);
-                if (locationUrl == null) {
-                    throw new IllegalArgumentException(String.format("Couldn't find FXML file: \"%s\".", location));
-                }
-                loader.setLocation(locationUrl);
-            }
-
-            final String charset = fxmlLoaderParams.charset();
-            if (! charset.equals(FXMLLoaderParams.CHARSET_UNSPECIFIED)) {
-                loader.setCharset(Charset.forName(fxmlLoaderParams.charset()));
-            }
-
-            final String resources = fxmlLoaderParams.resources();
-            if (!resources.equals(FXMLLoaderParams.RESOURCES_UNSPECIFIED)) {
-                loader.setResources(ResourceBundle.getBundle(resources));
-            }
-
-        }
-
-        return loader;
+        final FXMLLoaderParams fxmlLoaderParams = annotated.getAnnotation(FXMLLoaderParams.class);
+        return CdiFXMLLoader.create(
+                fxmlLoaderParams.location(),
+                fxmlLoaderParams.resources(),
+                fxmlLoaderParams.charset(),
+                declaringClass);
 
     }
 

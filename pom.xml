@@ -36,6 +36,7 @@ limitations under the License.
 
     <modules >
         <module>com.cathive.fx.cdi</module>
+        <module>com.cathive.fx.cdi.demos</module>
     </modules>
 
     <properties>
@@ -118,52 +119,45 @@ limitations under the License.
 
     <dependencyManagement>
 
-    <dependencies>
-        <!-- CDI API -->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>${cdi-api.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>false</optional>
-        </dependency>
+        <dependencies>
+            <!-- CDI API -->
+            <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>${cdi-api.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+                <optional>false</optional>
+            </dependency>
 
-        <!-- CDI implementation: JBoss WELD -->
-        <dependency>
-            <groupId>org.jboss.weld.se</groupId>
-            <artifactId>weld-se</artifactId>
-            <version>${weld.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
+            <!-- CDI implementation: JBoss WELD -->
+            <dependency>
+                <groupId>org.jboss.weld.se</groupId>
+                <artifactId>weld-se</artifactId>
+                <version>${weld.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+                <optional>true</optional>
+            </dependency>
 
-        <!-- CDI implementation: Apache OpenWebBeans -->
-        <dependency>
-            <groupId>org.apache.openwebbeans</groupId>
-            <artifactId>openwebbeans-spi</artifactId>
-            <version>${openwebbeans.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openwebbeans</groupId>
-            <artifactId>openwebbeans-impl</artifactId>
-            <version>${openwebbeans.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>true</optional>
-        </dependency>
+            <!-- CDI implementation: Apache OpenWebBeans -->
+            <dependency>
+                <groupId>org.apache.openwebbeans</groupId>
+                <artifactId>openwebbeans-spi</artifactId>
+                <version>${openwebbeans.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.openwebbeans</groupId>
+                <artifactId>openwebbeans-impl</artifactId>
+                <version>${openwebbeans.version}</version>
+                <type>jar</type>
+                <scope>compile</scope>
+                <optional>true</optional>
+            </dependency>
 
-        <!-- Unit tests -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <scope>test</scope>
-            <version></version>
-        </dependency>
         </dependencies>
 
     </dependencyManagement>

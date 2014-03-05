@@ -22,8 +22,4 @@ limitations under the License.
        bean-discovery-mode="annotated"
        version="1.1">
 
-    <interceptors>
-        <class>com.cathive.fx.cdi.internal.FXMLComponentInterceptor</class>
-    </interceptors>
-
 </beans>
