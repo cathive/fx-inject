@@ -19,6 +19,7 @@ package com.cathive.fx.cdi;
 import javafx.application.Application;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
@@ -100,6 +101,8 @@ public class FxCdiExtension implements Extension {
 
     void afterBeanDiscovery(final @Observes AfterBeanDiscovery abd, final BeanManager beanManager) {
 
+        assert JAVA_FX_APPLICATION_BEAN == null;
+
         final AnnotatedType<CdiApplication> annotatedType = (AnnotatedType<CdiApplication>) beanManager.createAnnotatedType(JAVA_FX_APPLICATION.getClass());
         final BeanAttributes<CdiApplication> beanAttributes = beanManager.createBeanAttributes(annotatedType);
         final InjectionTarget<CdiApplication> injectionTarget = beanManager.createInjectionTarget(annotatedType);
@@ -127,7 +130,7 @@ public class FxCdiExtension implements Extension {
     static class CdiApplicationBean<T extends CdiApplication> implements Bean<T>, PassivationCapable {
 
         /** The scope to be used for our JavaFX application instance. */
-        static final Class<? extends Annotation> SCOPE = ApplicationScoped.class;
+        static final Class<? extends Annotation> SCOPE = Dependent.class;
 
         final T instance;
         final Set<Annotation> qualifiers;

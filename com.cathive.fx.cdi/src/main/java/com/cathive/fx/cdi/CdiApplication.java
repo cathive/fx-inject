@@ -39,4 +39,9 @@ abstract class CdiApplication extends Application {
 
     }
 
+    @Override
+    public String toString() {
+        return String.format("[CDI-aware] %s", super.toString());
+    }
+
 }

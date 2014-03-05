@@ -40,6 +40,8 @@ class FXMLComponentInterceptor {
                 targetClass);
 
         fxmlLoader.setRoot(target);
+        fxmlLoader.setController(target);
+
         fxmlLoader.load();
 
     }
