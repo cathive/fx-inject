@@ -37,12 +37,7 @@ public class CdiFXMLLoader extends FXMLLoader {
         this.setControllerFactory((aClass) -> CDI.current().select(aClass));
 
         // Uses CDI to instantiate all components within our FXML files.
-        this.setBuilderFactory(new BuilderFactory() {
-            @Override
-            public Builder<?> getBuilder(Class<?> aClass) {
-                return () -> CDI.current().select(aClass).get();
-            }
-        });
+        this.setBuilderFactory(aClass -> () -> CDI.current().select(aClass).get());
 
     }
 
