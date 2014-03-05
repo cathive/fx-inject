@@ -1,6 +1,9 @@
 package com.cathive.fx.cdi;
 
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.util.Builder;
+import javafx.util.BuilderFactory;
 
 import javax.enterprise.inject.spi.CDI;
 import java.net.URL;
@@ -31,7 +34,15 @@ public class CdiFXMLLoader extends FXMLLoader {
 
         // Uses the currently loaded CDI implementation to look up controller classes
         // that have been specified via "fx:controller='...'" in our FXML files.
-        setControllerFactory((aClass) -> CDI.current().select(aClass));
+        this.setControllerFactory((aClass) -> CDI.current().select(aClass));
+
+        // Uses CDI to instantiate all components within our FXML files.
+        this.setBuilderFactory(new BuilderFactory() {
+            @Override
+            public Builder<?> getBuilder(Class<?> aClass) {
+                return () -> CDI.current().select(aClass).get();
+            }
+        });
 
     }
 

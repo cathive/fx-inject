@@ -125,19 +125,18 @@ limitations under the License.
                 <groupId>javax.enterprise</groupId>
                 <artifactId>cdi-api</artifactId>
                 <version>${cdi-api.version}</version>
-                <type>jar</type>
-                <scope>compile</scope>
-                <optional>false</optional>
             </dependency>
 
             <!-- CDI implementation: JBoss WELD -->
             <dependency>
                 <groupId>org.jboss.weld.se</groupId>
-                <artifactId>weld-se</artifactId>
+                <artifactId>weld-se-core</artifactId>
                 <version>${weld.version}</version>
-                <type>jar</type>
-                <scope>compile</scope>
-                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-core-impl</artifactId>
+                <version>${weld.version}</version>
             </dependency>
 
             <!-- CDI implementation: Apache OpenWebBeans -->
@@ -145,17 +144,11 @@ limitations under the License.
                 <groupId>org.apache.openwebbeans</groupId>
                 <artifactId>openwebbeans-spi</artifactId>
                 <version>${openwebbeans.version}</version>
-                <type>jar</type>
-                <scope>compile</scope>
-                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.apache.openwebbeans</groupId>
                 <artifactId>openwebbeans-impl</artifactId>
                 <version>${openwebbeans.version}</version>
-                <type>jar</type>
-                <scope>compile</scope>
-                <optional>true</optional>
             </dependency>
 
         </dependencies>

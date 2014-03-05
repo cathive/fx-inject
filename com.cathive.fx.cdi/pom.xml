@@ -26,7 +26,15 @@
         <!-- CDI implementation: JBoss WELD -->
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
-            <artifactId>weld-se</artifactId>
+            <artifactId>weld-se-core</artifactId>
+            <version>${weld.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core-impl</artifactId>
             <version>${weld.version}</version>
             <type>jar</type>
             <scope>compile</scope>
