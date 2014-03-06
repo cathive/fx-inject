@@ -29,7 +29,6 @@
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>${cdi-api.version}</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>false</optional>
@@ -38,12 +37,12 @@
         <!-- CDI implementation: JBoss WELD -->
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
-            <artifactId>weld-se</artifactId>
-            <version>${weld.version}</version>
+            <artifactId>weld-se-core</artifactId>
             <type>jar</type>
             <scope>compile</scope>
             <optional>false</optional>
         </dependency>
+
 
         <!-- Unit tests -->
         <dependency>
