@@ -41,11 +41,15 @@ class FXMLLoaderFactory {
         // If an annotation of type @FXMLLoaderParams can be found, use it's parameters
         // to configure the FXMLLoader instance that shall be used to perform the loading
         // of the FXML file.
-        final FXMLLoaderParams fxmlLoaderParams = annotated.getAnnotation(FXMLLoaderParams.class);
+        final FXMLLoaderParams annotation = annotated.getAnnotation(FXMLLoaderParams.class);
+        if (annotation == null) {
+            throw new IllegalStateException(String.format("No @FXMLLoaderParams annotation could be retrieved from class %s.", declaringClass.getName()));
+        }
+
         return CdiFXMLLoader.create(
-                fxmlLoaderParams.location(),
-                fxmlLoaderParams.resources(),
-                fxmlLoaderParams.charset(),
+                annotation.location(),
+                annotation.resources(),
+                annotation.charset(),
                 declaringClass);
 
     }
