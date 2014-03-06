@@ -20,37 +20,24 @@
             <groupId>com.cathive.fx</groupId>
             <artifactId>com.cathive.fx.cdi</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>false</optional>
         </dependency>
 
         <!-- CDI API -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>false</optional>
         </dependency>
 
         <!-- CDI implementation: JBoss WELD -->
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
-            <type>jar</type>
-            <scope>compile</scope>
-            <optional>false</optional>
         </dependency>
-
 
         <!-- Unit tests -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <type>jar</type>
-            <scope>test</scope>
-            <optional>false</optional>
         </dependency>
 
     </dependencies>
