@@ -20,9 +20,17 @@ import com.cathive.fx.cdi.CdiFXMLLoader;
 import com.cathive.fx.cdi.FXMLLoaderParams;
 import javafx.fxml.FXMLLoader;
 
+import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ResourceBundle;
+
+import static com.cathive.fx.cdi.CdiFXMLLoader.CHARSET_UNSPECIFIED;
+import static com.cathive.fx.cdi.CdiFXMLLoader.LOCATION_UNSPECIFIED;
+import static com.cathive.fx.cdi.CdiFXMLLoader.RESOURCES_UNSPECIFIED;
 
 /**
  * This factory is responsible for the production of CDI-aware {@link javafx.fxml.FXMLLoader} instances.
@@ -33,7 +41,7 @@ class FXMLLoaderFactory {
 
     @Produces
     @FXMLLoaderParams
-    FXMLLoader createCdiFXMLLoader(final InjectionPoint injectionPoint) {
+    FXMLLoader createCdiFXMLLoader(@New final CdiFXMLLoader fxmlLoader, final InjectionPoint injectionPoint) {
 
         final Annotated annotated = injectionPoint.getAnnotated();
         final Class<?> declaringClass = injectionPoint.getMember().getDeclaringClass();
@@ -41,16 +49,42 @@ class FXMLLoaderFactory {
         // If an annotation of type @FXMLLoaderParams can be found, use it's parameters
         // to configure the FXMLLoader instance that shall be used to perform the loading
         // of the FXML file.
-        final FXMLLoaderParams annotation = annotated.getAnnotation(FXMLLoaderParams.class);
-        if (annotation == null) {
-            throw new IllegalStateException(String.format("No @FXMLLoaderParams annotation could be retrieved from class %s.", declaringClass.getName()));
+        if (annotated.isAnnotationPresent(FXMLLoaderParams.class)) {
+            final FXMLLoaderParams annotation = annotated.getAnnotation(FXMLLoaderParams.class);
+            initializeFXMLLoader(fxmlLoader, declaringClass, annotation.location(), annotation.resources(), annotation.charset());
         }
 
-        return CdiFXMLLoader.create(
-                annotation.location(),
-                annotation.resources(),
-                annotation.charset(),
-                declaringClass);
+        return fxmlLoader;
+
+    }
+
+    /**
+     * Initializes the given FXMLLoader using the provided parameters.
+     * @param fxmlLoader
+     * @param targetClass
+     * @param location
+     * @param resources
+     * @param charset
+     */
+    static void initializeFXMLLoader(final FXMLLoader fxmlLoader, final Class<?> targetClass, final String location, final String resources, final String charset) {
+
+        // Checks the location that has been specified (if any) and uses the default
+        // class loader to create an URL that points to a FXML file on the classpath.
+        if (location != null && !location.equals(LOCATION_UNSPECIFIED)) {
+            final URL locationUrl = targetClass.getResource(location);
+            if (locationUrl == null) {
+                throw new IllegalArgumentException(String.format("Couldn't find FXML file: \"%s\".", location));
+            }
+            fxmlLoader.setLocation(locationUrl);
+        }
+
+        if (charset != null && !charset.equals(CHARSET_UNSPECIFIED)) {
+            fxmlLoader.setCharset(Charset.forName(charset));
+        }
+
+        if (resources != null && !resources.equals(RESOURCES_UNSPECIFIED)) {
+            fxmlLoader.setResources(ResourceBundle.getBundle(resources));
+        }
 
     }
 

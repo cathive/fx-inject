@@ -4,6 +4,7 @@ import com.cathive.fx.cdi.CdiFXMLLoader;
 import com.cathive.fx.cdi.FXMLComponent;
 import javafx.fxml.FXMLLoader;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -28,16 +29,10 @@ class FXMLComponentInterceptor {
         final Object target = invocationContext.getTarget();
         final Class<?> targetClass = target.getClass();
 
-        final FXMLComponent annotation = targetClass.getAnnotation(FXMLComponent.class);
-        if (annotation == null) {
-            throw new IllegalStateException(String.format("No @FXMLComponent annotation could be retrieved from class %s.", targetClass.getName()));
-        }
+        final CdiFXMLLoader fxmlLoader = CDI.current().select(CdiFXMLLoader.class).get();
 
-        final FXMLLoader fxmlLoader = CdiFXMLLoader.create(
-                annotation.location(),
-                annotation.resources(),
-                annotation.charset(),
-                targetClass);
+        final FXMLComponent annotation = targetClass.getAnnotation(FXMLComponent.class);
+        FXMLLoaderFactory.initializeFXMLLoader(fxmlLoader, targetClass, annotation.location(), annotation.resources(), annotation.charset());
 
         fxmlLoader.setRoot(target);
         fxmlLoader.setController(target);
