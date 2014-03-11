@@ -19,12 +19,12 @@ limitations under the License.
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.cathive.fx</groupId>
-    <artifactId>com.cathive.fx.cdi.parent</artifactId>
+    <groupId>com.cathive.fx.inject</groupId>
+    <artifactId>fx-inject</artifactId>
     <packaging>pom</packaging>
     <version>1.0.1-SNAPSHOT</version>
-    <name>CDI integration for JavaFX</name>
-    <description>Context And Dependency Injection (CDI) with JavaFX using JBoss WELD</description>
+    <name>fx-inject</name>
+    <description>Dependency Injection with JavaFX</description>
     <url>https://github.com/cathive/fx-cdi/</url>
     <inceptionYear>2013</inceptionYear>
 
@@ -35,8 +35,9 @@ limitations under the License.
     </parent>
 
     <modules >
-        <module>com.cathive.fx.cdi</module>
-        <module>com.cathive.fx.cdi.demos</module>
+        <module>fx-inject-core</module>
+        <module>fx-inject-examples</module>
+        <module>fx-cdi</module>
     </modules>
 
     <properties>
@@ -72,7 +73,7 @@ limitations under the License.
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/cathive/fx-cdi/issues</url>
+        <url>https://github.com/cathive/fx-inject/issues</url>
     </issueManagement>
 
     <developers>
@@ -106,9 +107,9 @@ limitations under the License.
     <contributors />
 
     <scm>
-        <connection>scm:git:https://github.com/cathive/fx-cdi.git</connection>
-        <developerConnection>scm:git:git@github.com:cathive/fx-cdi.git</developerConnection>
-        <url>https://github.com/cathive/fx-cdi/</url>
+        <connection>scm:git:https://github.com/cathive/fx-inject.git</connection>
+        <developerConnection>scm:git:git@github.com:cathive/fx-inject.git</developerConnection>
+        <url>https://github.com/cathive/fx-inject/</url>
         <tag>master</tag>
     </scm>
 
