@@ -43,7 +43,7 @@ public class HelloButton extends Button implements Initializable {
                 Bindings.when(personalized)
                         .then(personalGreeting)
                         .otherwise(defaultTextString));
-    }git s
+    }
 
     @FXML
     protected void buttonPressed(final ActionEvent event) {
