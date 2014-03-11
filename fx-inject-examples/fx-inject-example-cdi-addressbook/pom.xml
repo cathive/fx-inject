@@ -18,7 +18,13 @@
         <!-- fx-cdi -->
         <dependency>
             <groupId>com.cathive.fx</groupId>
-            <artifactId>com.cathive.fx.cdi</artifactId>
+            <artifactId>fx-cdi</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cathive.fx.inject</groupId>
+            <artifactId>fx-inject-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

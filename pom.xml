@@ -118,7 +118,7 @@ limitations under the License.
 
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.org/cathive/fx-cdi/</url>
+        <url>https://travis-ci.org/cathive/fx-inject/</url>
     </ciManagement>
 
     <dependencyManagement>
@@ -149,6 +149,7 @@ limitations under the License.
                 <artifactId>weld-core-impl</artifactId>
                 <version>${weld.version}</version>
                 <exclusions>
+                    <!-- exclude vintage troublemaker guava version -->
                     <exclusion>
                         <groupId>com.google.guava</groupId>
                         <artifactId>guava</artifactId>

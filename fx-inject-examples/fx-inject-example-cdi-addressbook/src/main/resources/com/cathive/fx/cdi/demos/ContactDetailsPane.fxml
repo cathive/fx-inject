@@ -2,8 +2,6 @@
 
 <?language javascript?>
 
-<?import java.lang.String?>
-
 <?import com.cathive.fx.cdi.demos.HelloButton?>
 <?import javafx.scene.layout.VBox?>
 <fx:root xmlns:fx="http://javafx.com/fxml"
@@ -12,7 +10,7 @@
 
     <children>
         <HelloButton fx:id="helloButton1"/>
-        <VBox alignment="CENTER"></VBox>
+        <VBox alignment="CENTER"/>
     </children>
 
 </fx:root>

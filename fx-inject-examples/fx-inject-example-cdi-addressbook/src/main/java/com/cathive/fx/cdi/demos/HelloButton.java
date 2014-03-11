@@ -1,8 +1,7 @@
 package com.cathive.fx.cdi.demos;
 
-import com.cathive.fx.cdi.FXMLComponent;
+import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,24 +17,26 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * Simple hello button. Note how the FXML-file defining this component is linked via the
+ * <link>com.cathive.fx.inject.core.FXMLComponent</link> annotation.
+ * Neat, isn't it?
+ *
  * @author Benjamin P. Jung
+ * @author Alexander Erben
  */
+@SuppressWarnings("UnusedDeclaration")
 @FXMLComponent(location = "HelloButton.fxml")
 public class HelloButton extends Button implements Initializable {
 
-    @Inject private Instance<FxDemoApplication> app;
+    @Inject
+    private Instance<FxDemoApplication> app;
 
-    @FXML private String defaultTextString;
+    @FXML
+    private String defaultTextString;
 
     private final BooleanProperty personalized = new SimpleBooleanProperty(this, "personalized");
-    public boolean isPersonalized() { return this.personalized.get(); }
-    public void setPersonalized(final boolean personalized) { this.personalized.set(personalized); }
-    public BooleanProperty personalizedProperty() { return this.personalized; }
 
     private final StringProperty personalGreeting = new SimpleStringProperty(this, "personalGreeting");
-    public String getPersonalGreeting() { return this.personalGreeting.get(); }
-    public void setPersonalGreeting(final String personalGreeting) { this.personalGreeting.set(personalGreeting); }
-    public StringProperty personalGreetingProperty() { return this.personalGreeting; }
 
     @Override
     public void initialize(final URL url, final ResourceBundle resourceBundle) {
@@ -47,8 +48,32 @@ public class HelloButton extends Button implements Initializable {
 
     @FXML
     protected void buttonPressed(final ActionEvent event) {
-        this.setPersonalized(! this.isPersonalized());
+        this.setPersonalized(!this.isPersonalized());
         System.out.println(app.get());
+    }
+
+    public boolean isPersonalized() {
+        return this.personalized.get();
+    }
+
+    public void setPersonalized(final boolean personalized) {
+        this.personalized.set(personalized);
+    }
+
+    public BooleanProperty personalizedProperty() {
+        return this.personalized;
+    }
+
+    public String getPersonalGreeting() {
+        return this.personalGreeting.get();
+    }
+
+    public void setPersonalGreeting(final String personalGreeting) {
+        this.personalGreeting.set(personalGreeting);
+    }
+
+    public StringProperty personalGreetingProperty() {
+        return this.personalGreeting;
     }
 
 }

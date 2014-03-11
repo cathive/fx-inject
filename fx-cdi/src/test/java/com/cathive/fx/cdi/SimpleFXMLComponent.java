@@ -1,5 +1,6 @@
 package com.cathive.fx.cdi;
 
+import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Button;

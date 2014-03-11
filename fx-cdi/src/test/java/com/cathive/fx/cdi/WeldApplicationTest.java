@@ -1,6 +1,7 @@
 package com.cathive.fx.cdi;
 
 
+import com.cathive.fx.inject.core.FXMLLoaderParams;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
