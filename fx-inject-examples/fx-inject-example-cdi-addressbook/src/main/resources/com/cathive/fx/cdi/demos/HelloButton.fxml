@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?language javascript?>
+
+<?import java.lang.String?>
+
+<fx:root xmlns:fx="http://javafx.com/fxml"
+         type="com.cathive.fx.cdi.demos.HelloButton"
+         fx:id="helloButton" onAction="#buttonPressed">
+
+    <fx:script>
+        helloButton.setPersonalGreeting("Hello, " + Java.type("java.lang.System").getProperty("user.name"));
+    </fx:script>
+
+    <fx:define>
+        <String fx:id="defaultTextString" fx:value="Hello, World!"/>
+    </fx:define>
+
+    <personalized>false</personalized>
+
+</fx:root>
