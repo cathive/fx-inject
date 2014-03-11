@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fx-inject-examples</artifactId>
+        <groupId>com.cathive.fx.inject</groupId>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>fx-inject-example-cdi-addressbook</artifactId>
+    <description>fx-cdi address book example</description>
+
+    <dependencies>
+
+        <!-- fx-cdi -->
+        <dependency>
+            <groupId>com.cathive.fx</groupId>
+            <artifactId>com.cathive.fx.cdi</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- CDI API -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${cdi-api.version}</version>
+        </dependency>
+
+        <!-- CDI implementation: JBoss WELD -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se</artifactId>
+            <version>${weld.version}</version>
+        </dependency>
+
+        <!-- Unit tests -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
