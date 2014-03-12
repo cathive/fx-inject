@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1"
+         type="javafx.scene.layout.VBox">
+
+<children><HBox maxWidth="1.7976931348623157E308" spacing="8.0" VBox.vgrow="NEVER">
+<children><Label fx:id="lastNameLabel" text="_lastName_" /><Label fx:id="firstNameLabel" text="_firstName_" /><ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+</children>
+<padding>
+<Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
+</padding></HBox><Separator prefWidth="200.0" />
+</children></fx:root>

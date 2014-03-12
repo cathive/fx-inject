@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.cathive.fx</groupId>
             <artifactId>fx-cdi</artifactId>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- CDI API -->

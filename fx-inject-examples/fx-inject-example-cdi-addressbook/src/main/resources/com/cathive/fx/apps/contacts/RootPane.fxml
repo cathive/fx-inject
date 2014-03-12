@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import com.cathive.fx.apps.contacts.ContactDetailsPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root xmlns="http://javafx.com/javafx/8"
+         xmlns:fx="http://javafx.com/fxml/1"
+         type="javafx.scene.layout.AnchorPane">
+
+    <children>
+        <BorderPane layoutX="134.0" layoutY="95.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <ToolBar fx:id="toolBar">
+                    <items>
+                        <Button mnemonicParsing="false" text="Button" />
+                    </items>
+                </ToolBar>
+            </top>
+            <center>
+                <ContactDetailsPane fx:id="contactDetailsPane"/>
+            </center>
+        </BorderPane>
+    </children>
+
+</fx:root>
