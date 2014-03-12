@@ -27,19 +27,11 @@ import java.util.Set;
 
 import javafx.util.Builder;
 import javafx.util.StringConverter;
-import javafx.util.converter.BigDecimalStringConverter;
-import javafx.util.converter.BigIntegerStringConverter;
-import javafx.util.converter.BooleanStringConverter;
-import javafx.util.converter.ByteStringConverter;
-import javafx.util.converter.DefaultStringConverter;
-import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.FloatStringConverter;
-import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.LongStringConverter;
-import javafx.util.converter.ShortStringConverter;
+import javafx.util.converter.*;
 
 /**
- * Ugly helper class.
+ * Abstract base class for all component builders that use some kind of
+ * dependency injection framework to construct instances.
  * @author Benjamin P. Jung
  * @since 1.1.0
  */
@@ -61,6 +53,7 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
         // Primitives
         STRING_CONVERTERS.put(boolean.class, BooleanStringConverter.class);
         STRING_CONVERTERS.put(byte.class, ByteStringConverter.class);
+        STRING_CONVERTERS.put(char.class, CharacterStringConverter.class);
         STRING_CONVERTERS.put(double.class, DoubleStringConverter.class);
         STRING_CONVERTERS.put(float.class, FloatStringConverter.class);
         STRING_CONVERTERS.put(int.class, IntegerStringConverter.class);
@@ -70,6 +63,7 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
         // Primitive wrappers
         STRING_CONVERTERS.put(Boolean.class, BooleanStringConverter.class);
         STRING_CONVERTERS.put(Byte.class, ByteStringConverter.class);
+        STRING_CONVERTERS.put(Character.class, CharacterStringConverter.class);
         STRING_CONVERTERS.put(Double.class, DoubleStringConverter.class);
         STRING_CONVERTERS.put(Float.class, FloatStringConverter.class);
         STRING_CONVERTERS.put(Integer.class, IntegerStringConverter.class);
@@ -90,6 +84,16 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
         this.componentClass = componentClass;
     }
 
+    /**
+     * Returns an instance of the requested class from the dependency injection framework being used.
+     * @param clazz
+     *         Class to be constructed via DI container.
+     * @param <T>
+     *         Type of the class to be constructed.
+     * @return
+     *         An instance of the requested class that has been fetched
+     *         via the concrete implementation of DI container being used.
+     */
     protected abstract <T> T getInstance(Class<T> clazz);
 
     @Override
