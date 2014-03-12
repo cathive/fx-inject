@@ -21,6 +21,7 @@ import com.cathive.fx.inject.core.FXMLComponentBuilder;
 import javax.enterprise.inject.spi.CDI;
 
 /**
+ * Component builder for CDI
  *
  * @author Benjamin P. Jung
  */
@@ -34,5 +35,4 @@ public class CdiFXMLComponentBuilder<T> extends FXMLComponentBuilder<T> {
     protected <T> T getInstance(Class<T> clazz) {
         return CDI.current().select(clazz).get();
     }
-
 }

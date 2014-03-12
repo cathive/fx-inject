@@ -1,6 +1,5 @@
 package com.cathive.fx.cdi;
 
-import com.cathive.fx.cdi.CdiFXMLLoader;
 import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.fxml.FXMLLoader;
 
@@ -12,9 +11,11 @@ import javax.interceptor.InvocationContext;
 /**
  * This factory is responsible for the production of CDI-aware FXML-based custom components that
  * have been annotated as such using the {@link com.cathive.fx.inject.core.FXMLComponent @FXMLComponent} annotation.
+ *
  * @author Benjamin P. Jung
  * @since 1.1.0
  */
+@SuppressWarnings("UnusedDeclaration")
 @FXMLComponent
 @Interceptor
 class FXMLComponentInterceptor {
@@ -33,7 +34,6 @@ class FXMLComponentInterceptor {
         if (annotation == null) {
             throw new IllegalStateException(String.format("No @FXMLComponent annotation could be retrieved from class %s.", targetClass.getName()));
         }
-
         final FXMLLoader fxmlLoader = CDI.current().select(CdiFXMLLoader.class).get();
         FXMLLoaderFactory.initializeFXMLLoader(
                 fxmlLoader,
@@ -41,12 +41,8 @@ class FXMLComponentInterceptor {
                 annotation.location(),
                 annotation.resources(),
                 annotation.charset());
-
         fxmlLoader.setRoot(target);
         fxmlLoader.setController(target);
-
         fxmlLoader.load();
-
     }
-
 }

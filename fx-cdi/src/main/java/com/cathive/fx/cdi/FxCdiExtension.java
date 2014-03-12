@@ -18,7 +18,6 @@ package com.cathive.fx.cdi;
 
 import javafx.application.Application;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
@@ -37,6 +36,7 @@ import java.util.logging.Logger;
  * injected (using the {@link javax.inject.Inject @javax.inject.Inject} annotation).
  * @author Benjamin P. Jung
  */
+@SuppressWarnings("UnusedDeclaration")
 public class FxCdiExtension implements Extension {
 
     /** Logger for this instance. */
