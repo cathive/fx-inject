@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+Copyright (C) 2013,2014 The Cat Hive Developers.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 <?language javascript?>
 
-<?import java.lang.*?>
 <?import com.cathive.fx.apps.contacts.ContactDetailsPane?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import com.cathive.fx.apps.contacts.ContactListCell?>
 <?import com.cathive.fx.apps.contacts.ContactListView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.*?>
 <fx:root xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1"
          type="javafx.scene.layout.AnchorPane">
 
-    <children>
-        <BorderPane layoutX="134.0" layoutY="95.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <top>
-                <ToolBar fx:id="toolBar">
-                    <items>
-                        <Button mnemonicParsing="false" text="Button" />
-                    </items>
-                </ToolBar>
-            </top>
-            <center>
-                <ContactDetailsPane fx:id="contactDetailsPane"/>
-            </center>
-            <left>
-                <ScrollPane minWidth="256" fitToHeight="true" fitToWidth="true">
-                        <ContactListView fx:id="contactListView"/>
-                </ScrollPane>
-            </left>
-        </BorderPane>
-    </children>
+  <children>
+    <BorderPane layoutX="134.0" layoutY="95.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <top>
+        <ToolBar fx:id="toolBar">
+          <items>
+            <Button mnemonicParsing="false" text="Button"/>
+          </items>
+        </ToolBar>
+      </top>
+      <center>
+        <ContactDetailsPane fx:id="contactDetailsPane"/>
+      </center>
+      <left>
+        <ScrollPane minWidth="256" fitToHeight="true" fitToWidth="true">
+          <ContactListView fx:id="contactListView"/>
+        </ScrollPane>
+      </left>
+    </BorderPane>
+  </children>
 
-    <fx:script source="RootPane.js"/>
+  <fx:script source="RootPane.js"/>
 
 </fx:root>

@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2013,2014 The Cat Hive Developers.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.cathive.fx.apps.contacts;
 
 import com.cathive.fx.apps.contacts.model.Person;
@@ -12,9 +28,9 @@ import javafx.scene.layout.HBox;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.New;
 
 /**
+ * List cell to display contacts.
  * @author Benjamin P. Jung
  */
 @Dependent
@@ -24,11 +40,20 @@ public class ContactListCell extends HBox {
     public static final String PERSON_PROPERTY = "person";
 
     private final ObjectProperty<Person> person = new SimpleObjectProperty<>(this, PERSON_PROPERTY);
-    public ObjectProperty<Person> personProperty() { return this.person; }
-    public Person getPerson() { return this.person.get(); }
 
-    @FXML private Label displayNameLabel;
-    @FXML private ImageView contactNameLabel;
+    @FXML
+    private Label displayNameLabel;
+    @FXML
+    private ImageView contactNameLabel;
+
+    public ObjectProperty<Person> personProperty() {
+        return this.person;
+    }
+
+    public Person getPerson() {
+        return this.person.get();
+    }
+
 
     @PostConstruct
     protected void init() {
