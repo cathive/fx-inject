@@ -15,9 +15,7 @@
  */
 
 /**
- * Internal implementation details of the fx-cdi framework.
- * <p>Classes of this package are <em>not</em> part of the public API
- * and should not be used by application programmers directly!</p>
+ * CDI loader implementation backed by JBoss WELD.
  */
 
-package com.cathive.fx.cdi.internal;
+package com.cathive.fx.cdi.weld;

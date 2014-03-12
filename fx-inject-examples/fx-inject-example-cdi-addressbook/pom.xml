@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <artifactId>fx-inject-examples</artifactId>
         <groupId>com.cathive.fx.inject</groupId>
@@ -15,37 +16,42 @@
 
     <dependencies>
 
-        <!-- fx-cdi -->
-        <dependency>
-            <groupId>com.cathive.fx</groupId>
-            <artifactId>fx-cdi</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
+        <!-- fx-inject modules -->
         <dependency>
             <groupId>com.cathive.fx.inject</groupId>
             <artifactId>fx-inject-core</artifactId>
-            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.cathive.fx</groupId>
+            <artifactId>fx-cdi</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- CDI API -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>${cdi-api.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- CDI implementation: JBoss WELD -->
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
-            <artifactId>weld-se</artifactId>
-            <version>${weld.version}</version>
+            <artifactId>weld-se-core</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core-impl</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Unit tests -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

@@ -16,27 +16,55 @@
 
 package com.cathive.fx.cdi;
 
+import com.cathive.fx.cdi.spi.FxCdiLoader;
 import javafx.application.Application;
+
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 /**
  * The purpose of this (abstract) class is to mark JavaFX applications that utilize CDI.
  *
- * <p>Application developers should <em>not</em> extend this class directly, but should rather
- * use one of the provided sub-classes, e.g. {@link com.cathive.fx.cdi.WeldApplication}.</p>
- *
+ * <p>Make sure that you have an implementation of the {@link com.cathive.fx.cdi.spi.FxCdiLoader}
+ * on your classpath and it will be automatically picked up during initialization of the app.</p>
  * @author Benjamin P. Jung
  * @since 1.0.0
  */
-abstract class CdiApplication extends Application {
+public abstract class CdiApplication extends Application {
 
-    @Override
-    public void init() throws Exception {
+    private FxCdiLoader fxCdiLoader;
 
-        super.init();
+    public CdiApplication() {
+
+        super();
 
         // Sets the JavaFX application instance to be used when injecting an instance of this class.
         FxCdiExtension.setJavaFxApplication(this);
 
+        // Searches for a FxCdiLoader instance.
+        final ServiceLoader<FxCdiLoader> serviceLoader = ServiceLoader.loadInstalled(FxCdiLoader.class);
+        final Iterator<FxCdiLoader> loaderIterator = serviceLoader.iterator();
+        if (!loaderIterator.hasNext()) {
+            throw new IllegalStateException("No CDI Loader implementation for JavaFX could be found on your classpath.");
+        }
+        final FxCdiLoader loader = loaderIterator.next();
+        if (loaderIterator.hasNext()) {
+            throw new IllegalStateException("More than one CDI Loader implementation for JavaFX could be found on your classpath.");
+        }
+        this.fxCdiLoader = loader;
+
+    }
+
+    @Override
+    public void init() throws Exception {
+        super.init();
+        this.fxCdiLoader.initialize();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        this.fxCdiLoader.shutdown();
+        super.stop();
     }
 
     @Override

@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
  * <p>Example usage:</p>
  * <pre>
  * {@literal @}javax.inject.Inject
- * {@literal @}com.cathive.fx.cdi.FXMLLoaderParams(location = "MyFile.fxml")
+ * {@literal @}com.cathive.fx.inject.core.FXMLLoaderParams(location = "MyFile.fxml")
  * private FXMLLoader fxmlLoader;
  * </pre>
  *

@@ -14,47 +14,40 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.cdi;
+package com.cathive.fx.cdi.weld;
 
+import com.cathive.fx.cdi.spi.FxCdiLoader;
 import org.jboss.weld.environment.se.Weld;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class should be extended if you plan to use WELD SE as CDI provider for your
- * JavaFX applications.
  * @author Benjamin P. Jung
- * @since 1.0.0
  */
-public abstract class WeldApplication extends CdiApplication {
+public class WeldFxCdiLoader implements FxCdiLoader {
 
     /** Logger for this instance. */
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     /**
      * JBoss WELD instance to be used for all CDI-related operations.
-     * <p>This field will be populated during invocation of the {@link #init()}-method.</p>
      */
     private Weld weld;
 
     @Override
-    public void init() throws Exception {
-
-        super.init();
-
+    public void initialize() throws Exception {
         logger.log(Level.INFO, "Initializing JBoss WELD...");
         this.weld = new Weld();
         this.weld.initialize();
-
     }
 
     @Override
-    public void stop() throws Exception {
+    public void shutdown() throws Exception {
         if (this.weld != null) {
+            logger.log(Level.INFO, "Shutting down JBoss WELD...");
             this.weld.shutdown();
         }
-        super.stop();
     }
 
 }
