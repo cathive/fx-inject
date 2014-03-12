@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?language javascript?>
+
 <?import java.lang.*?>
 <?import com.cathive.fx.apps.contacts.ContactDetailsPane?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.cathive.fx.apps.contacts.ContactListCell?>
+<?import com.cathive.fx.apps.contacts.ContactListView?>
 <fx:root xmlns="http://javafx.com/javafx/8"
          xmlns:fx="http://javafx.com/fxml/1"
          type="javafx.scene.layout.AnchorPane">
@@ -21,7 +25,14 @@
             <center>
                 <ContactDetailsPane fx:id="contactDetailsPane"/>
             </center>
+            <left>
+                <ScrollPane minWidth="256" fitToHeight="true" fitToWidth="true">
+                        <ContactListView fx:id="contactListView"/>
+                </ScrollPane>
+            </left>
         </BorderPane>
     </children>
+
+    <fx:script source="RootPane.js"/>
 
 </fx:root>

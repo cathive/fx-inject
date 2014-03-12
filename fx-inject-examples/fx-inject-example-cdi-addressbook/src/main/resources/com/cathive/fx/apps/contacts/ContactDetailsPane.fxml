@@ -5,15 +5,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<fx:root xmlns="http://javafx.com/javafx/8"
-         xmlns:fx="http://javafx.com/fxml/1"
-         type="javafx.scene.layout.VBox">
+<fx:root prefHeight="480.0" prefWidth="640.0" spacing="8.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
 
 <children><HBox maxWidth="1.7976931348623157E308" spacing="8.0" VBox.vgrow="NEVER">
-<children><Label fx:id="lastNameLabel" text="_lastName_" /><Label fx:id="firstNameLabel" text="_firstName_" /><ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
+<children>
+    <Label fx:id="displayNameLabel" text="_displayName_" /><HBox alignment="TOP_RIGHT" spacing="8.0" HBox.hgrow="ALWAYS">
+<children><Button contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false" HBox.hgrow="ALWAYS">
+<graphic>
+    <ImageView fx:id="contactImageView" pickOnBounds="true" preserveRatio="true" styleClass="button" HBox.hgrow="ALWAYS">
+<viewport>
+<Rectangle2D height="64.0" minX="64.0" minY="6.0" width="64.0" />
+</viewport></ImageView>
+</graphic></Button>
+</children></HBox>
+</children></HBox><Separator prefWidth="200.0" /><VBox>
+<children><Label text="%heading.email_addresses">
+<font>
+<Font name="System Bold" size="13.0" />
+</font></Label>
+</children></VBox>
 </children>
 <padding>
 <Insets bottom="4.0" left="8.0" right="8.0" top="4.0" />
-</padding></HBox><Separator prefWidth="200.0" />
-</children></fx:root>
+</padding></fx:root>

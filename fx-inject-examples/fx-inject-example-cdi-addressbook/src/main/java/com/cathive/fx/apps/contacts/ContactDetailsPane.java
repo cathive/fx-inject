@@ -12,7 +12,7 @@ import javax.inject.Inject;
 /**
  * @author Benjamin P. Jung
  */
-@FXMLComponent(location = "ContactDetailsPane.fxml")
+@FXMLComponent(location = "ContactDetailsPane.fxml", resources = "com.cathive.fx.apps.contacts.Messages")
 public class ContactDetailsPane extends VBox {
 
     @Inject private Instance<ContactsApp> appInstance;
