@@ -21,6 +21,7 @@ import com.cathive.fx.inject.core.FXMLComponentBuilder;
 import javax.enterprise.inject.spi.CDI;
 
 /**
+ *
  * @author Benjamin P. Jung
  */
 public class CdiFXMLComponentBuilder<T> extends FXMLComponentBuilder<T> {
