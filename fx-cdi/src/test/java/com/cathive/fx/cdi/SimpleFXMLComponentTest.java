@@ -20,6 +20,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hamcrest.CoreMatchers;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.testng.PowerMockTestCase;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
@@ -37,7 +39,8 @@ import static org.testng.Assert.assertNull;
  * @author Alexander Erben
  */
 @Test
-public class SimpleFXMLComponentTest {
+@PrepareForTest({FxCdiExtension.class, Application.class})
+public class SimpleFXMLComponentTest extends PowerMockTestCase{
 
     @Test
     public void testInit() throws Exception {

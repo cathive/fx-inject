@@ -22,6 +22,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.testng.PowerMockTestCase;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
@@ -41,7 +43,8 @@ import static org.testng.Assert.assertNull;
  * @author Benjamin P. Jung
  */
 @Test
-public class WeldApplicationTest
+@PrepareForTest({FxCdiExtension.class, Application.class})
+public class WeldApplicationTest extends PowerMockTestCase
 {
     @Test
     public void testInit() throws Exception {

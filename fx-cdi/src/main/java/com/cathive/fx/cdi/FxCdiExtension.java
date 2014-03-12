@@ -69,7 +69,6 @@ public class FxCdiExtension implements Extension {
         return (T) JAVA_FX_APPLICATION;
     }
 
-
     // ---- ==== CDI LIFECYCLE EVENTS ==== -----------------------------------------------------------------------------
 
     void beforeBeanDiscovery(final @Observes BeforeBeanDiscovery beforeBeanDiscovery, final BeanManager beanManager) {
