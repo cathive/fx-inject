@@ -16,6 +16,7 @@
 
 package com.cathive.fx.inject.core;
 
+import com.cathive.fx.inject.core.util.StringConverterRetriever;
 import javafx.util.Builder;
 import javafx.util.StringConverter;
 

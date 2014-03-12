@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cathive.fx.inject.core;
+package com.cathive.fx.inject.core.util;
 
 import javafx.util.StringConverter;
 import javafx.util.converter.*;
