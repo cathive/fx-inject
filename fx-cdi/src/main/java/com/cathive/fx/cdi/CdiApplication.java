@@ -42,7 +42,7 @@ public abstract class CdiApplication extends Application {
         FxCdiExtension.setJavaFxApplication(this);
 
         // Searches for a FxCdiLoader instance.
-        final ServiceLoader<FxCdiLoader> serviceLoader = ServiceLoader.loadInstalled(FxCdiLoader.class);
+        final ServiceLoader<FxCdiLoader> serviceLoader = ServiceLoader.load(FxCdiLoader.class);
         final Iterator<FxCdiLoader> loaderIterator = serviceLoader.iterator();
         if (!loaderIterator.hasNext()) {
             throw new IllegalStateException("No CDI Loader implementation for JavaFX could be found on your classpath.");
