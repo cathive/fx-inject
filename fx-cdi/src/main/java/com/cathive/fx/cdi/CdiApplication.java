@@ -18,6 +18,7 @@ package com.cathive.fx.cdi;
 
 import com.cathive.fx.cdi.spi.FxCdiLoader;
 import javafx.application.Application;
+import javafx.application.Platform;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
@@ -64,6 +65,7 @@ public abstract class CdiApplication extends Application {
     @Override
     public void stop() throws Exception {
         this.fxCdiLoader.shutdown();
+        FxCdiExtension.setJavaFxApplication(null);
         super.stop();
     }
 

@@ -21,13 +21,18 @@ import com.cathive.fx.inject.core.FXMLComponentBuilder;
 import javax.enterprise.inject.spi.CDI;
 
 /**
- * Component builder for CDI
+ * Component builder for CDI-managed components.
  *
  * @author Benjamin P. Jung
  */
 public class CdiFXMLComponentBuilder<T> extends FXMLComponentBuilder<T> {
 
-    public CdiFXMLComponentBuilder(Class<T> componentClass) {
+    /**
+     * Default constructor.
+     * @param componentClass
+     *         Class to use when constructing new component instances.
+     */
+    CdiFXMLComponentBuilder(Class<T> componentClass) {
         super(componentClass);
     }
 
@@ -35,4 +40,10 @@ public class CdiFXMLComponentBuilder<T> extends FXMLComponentBuilder<T> {
     protected <T> T getInstance(Class<T> clazz) {
         return CDI.current().select(clazz).get();
     }
+
+    @Override
+    public String toString() {
+        return String.format("[CDI-aware] %s", super.toString());
+    }
+
 }

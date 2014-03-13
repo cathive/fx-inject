@@ -17,6 +17,7 @@
 package com.cathive.fx.cdi;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
@@ -29,6 +30,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
 /**
@@ -37,7 +39,7 @@ import java.util.logging.Logger;
  * @author Benjamin P. Jung
  */
 @SuppressWarnings({ "UnusedDeclaration", "CdiManagedBeanInconsistencyInspection" })
-public class FxCdiExtension implements Extension {
+class FxCdiExtension implements Extension {
 
     /** Logger for this instance. */
     private final Logger logger = Logger.getLogger(this.getClass().getName());
@@ -47,9 +49,9 @@ public class FxCdiExtension implements Extension {
      * <p>It is crucial that this field is populated (using {@link #setJavaFxApplication(CdiApplication)}
      * prior to initializing the CDI context.</p>
      */
-    static CdiApplication JAVA_FX_APPLICATION;
+    static ThreadLocal<CdiApplication> JAVA_FX_APPLICATION = new ThreadLocal<>();
 
-    static CdiApplicationBean<CdiApplication> JAVA_FX_APPLICATION_BEAN;
+    private CdiApplicationBean<CdiApplication> JAVA_FX_APPLICATION_BEAN;
 
     /**
      * Sets the JavaFX application instance to be provided by the CDI BeanManager.
@@ -58,51 +60,73 @@ public class FxCdiExtension implements Extension {
      */
     public static void setJavaFxApplication(final CdiApplication javaFxApplication) {
 
-        assert JAVA_FX_APPLICATION == null;
-        assert javaFxApplication != null;
+        final CountDownLatch latch = new CountDownLatch(1);
+        Platform.runLater(() -> {
+            JAVA_FX_APPLICATION.set(javaFxApplication);
+            latch.countDown();
+        });
 
-        JAVA_FX_APPLICATION = javaFxApplication;
+        if (!Platform.isFxApplicationThread()) {
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+        }
 
     }
 
     public static <T extends CdiApplication> T getJavaFxApplication() {
-        return (T) JAVA_FX_APPLICATION;
+
+        final ValueLatch<CdiApplication> latch = new ValueLatch(1);
+        Platform.runLater(() -> {
+            latch.setValue(JAVA_FX_APPLICATION.get());
+            latch.countDown();
+        });
+        if (!Platform.isFxApplicationThread()) {
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return (T) latch.getValue();
     }
 
     // ---- ==== CDI LIFECYCLE EVENTS ==== -----------------------------------------------------------------------------
 
-    void beforeBeanDiscovery(final @Observes BeforeBeanDiscovery beforeBeanDiscovery, final BeanManager beanManager) {
+    void beforeBeanDiscovery(@Observes final BeforeBeanDiscovery beforeBeanDiscovery, final BeanManager beanManager) {
 
-        if (JAVA_FX_APPLICATION == null) {
+        if (getJavaFxApplication() == null) {
             throw new IllegalStateException("JavaFX application was not provided. Did you call FxCdiExtension.setJavaFxApplication(..)?");
         }
 
     }
 
-    void processAnnotatedType(final @Observes ProcessAnnotatedType<? extends Application> pat, final BeanManager beanManager) {
+    void processAnnotatedType(@Observes final ProcessAnnotatedType<? extends Application> pat, final BeanManager beanManager) {
         final Class<? extends Application> javaClass = pat.getAnnotatedType().getJavaClass();
-        if (javaClass.equals(JAVA_FX_APPLICATION.getClass())) {
+        if (javaClass.equals(getJavaFxApplication().getClass())) {
             // We veto any sub-classes of CdiApplication to make sure, that the right bean
             // will be pulled into the dependency graph when using @Inject annotations.
             pat.veto();
         }
     }
 
-    <X> void processInjectionTarget(final @Observes ProcessInjectionTarget<X> pit, final BeanManager beanManager) {
+    <X> void processInjectionTarget(@Observes final ProcessInjectionTarget<X> pit, final BeanManager beanManager) {
         final Class<X> javaClass = pit.getAnnotatedType().getJavaClass();
-        if (javaClass.equals(JAVA_FX_APPLICATION.getClass())) {
+        if (javaClass.equals(getJavaFxApplication().getClass())) {
 
         }
     }
 
-    <T, X> void processInjectionPoint(final @Observes ProcessInjectionPoint<T, X> pip, final BeanManager beanManager) {
+    <T, X> void processInjectionPoint(@Observes final ProcessInjectionPoint<T, X> pip, final BeanManager beanManager) {
     }
 
-    void afterBeanDiscovery(final @Observes AfterBeanDiscovery abd, final BeanManager beanManager) {
+    void afterBeanDiscovery(@Observes final AfterBeanDiscovery abd, final BeanManager beanManager) {
 
         assert JAVA_FX_APPLICATION_BEAN == null;
 
-        final AnnotatedType<CdiApplication> annotatedType = (AnnotatedType<CdiApplication>) beanManager.createAnnotatedType(JAVA_FX_APPLICATION.getClass());
+        final AnnotatedType<CdiApplication> annotatedType = (AnnotatedType<CdiApplication>) beanManager.createAnnotatedType(getJavaFxApplication().getClass());
         final BeanAttributes<CdiApplication> beanAttributes = beanManager.createBeanAttributes(annotatedType);
         final InjectionTarget<CdiApplication> injectionTarget = beanManager.createInjectionTarget(annotatedType);
 
@@ -116,9 +140,13 @@ public class FxCdiExtension implements Extension {
 
     }
 
-    void afterDeploymentValidation(final @Observes AfterDeploymentValidation adv, final BeanManager beanManager) {
+    void afterDeploymentValidation(@Observes final  AfterDeploymentValidation adv, final BeanManager beanManager) {
         final CreationalContext<CdiApplication> creationalContext = beanManager.createCreationalContext(JAVA_FX_APPLICATION_BEAN);
-        JAVA_FX_APPLICATION_BEAN.injectionTarget.inject(JAVA_FX_APPLICATION, creationalContext);
+        JAVA_FX_APPLICATION_BEAN.injectionTarget.inject(getJavaFxApplication(), creationalContext);
+    }
+
+    void beforeShutdown(@Observes final BeforeShutdown beforeShutdown, final BeanManager beanManager) {
+        this.JAVA_FX_APPLICATION_BEAN = null;
     }
 
 
@@ -211,6 +239,30 @@ public class FxCdiExtension implements Extension {
         public String getId() {
             return this.instance.getClass().getName();
         }
+    }
+
+    /**
+     * A simple countdown latch that can carry a value
+     * @param <T>
+     *     Type of the value to be carried.
+     */
+    private static class ValueLatch<T> extends CountDownLatch {
+
+        /**
+         * Constructs a {@code CountDownLatch} initialized with the given count.
+         *
+         * @param count the number of times {@link #countDown} must be invoked
+         *              before threads can pass through {@link #await}
+         * @throws IllegalArgumentException if {@code count} is negative
+         */
+        public ValueLatch(final int count) {
+            super(count);
+        }
+
+        private T value;
+        public T getValue() { return this.value; }
+        public void setValue(final T value) { this.value = value; }
+
     }
 
 }

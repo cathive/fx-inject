@@ -9,9 +9,8 @@ import javax.enterprise.inject.spi.CDI;
 /**
  * CDI-aware FXMLLoader
  * @author Benjamin P. Jung
- * @since 1.1.0
  */
-public class CdiFXMLLoader extends FXMLLoader {
+class CdiFXMLLoader extends FXMLLoader {
 
     // Some marker strings for unspecified values.
     public static final String LOCATION_UNSPECIFIED = "$$$LOCATION_UNSPECIFIED$$$";
