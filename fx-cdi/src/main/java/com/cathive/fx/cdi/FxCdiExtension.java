@@ -36,7 +36,7 @@ import java.util.logging.Logger;
  * injected (using the {@link javax.inject.Inject @javax.inject.Inject} annotation).
  * @author Benjamin P. Jung
  */
-@SuppressWarnings("UnusedDeclaration")
+@SuppressWarnings({ "UnusedDeclaration", "CdiManagedBeanInconsistencyInspection" })
 public class FxCdiExtension implements Extension {
 
     /** Logger for this instance. */
