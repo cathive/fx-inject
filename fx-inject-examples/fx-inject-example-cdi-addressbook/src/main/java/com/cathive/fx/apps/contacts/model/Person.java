@@ -52,6 +52,9 @@ public class Person implements Serializable {
                         this.firstName));
     }
 
+
+    //<editor-fold defaultstate="collapsed" desc="Setters, getters and property accessors">
+
     public StringProperty lastNameProperty() {
         return this.lastName;
     }
@@ -83,4 +86,5 @@ public class Person implements Serializable {
     public String getDisplayName() {
         return this.displayName.get();
     }
+    // </editor-fold>
 }
