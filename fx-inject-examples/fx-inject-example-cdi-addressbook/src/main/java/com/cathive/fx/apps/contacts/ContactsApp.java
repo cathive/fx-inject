@@ -39,7 +39,11 @@ public class ContactsApp extends CdiApplication {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle(messages.getString(Messages.APP_TITLE));
-        primaryStage.setScene(new Scene(this.rootPane));
+
+        final Scene scene = new Scene(this.rootPane);
+        scene.getStylesheets().add(getClass().getResource("ContactsApp.css").toExternalForm());
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

@@ -18,12 +18,15 @@ package com.cathive.fx.apps.contacts;
 
 import com.cathive.fx.apps.contacts.model.Person;
 import com.cathive.fx.inject.core.FXMLComponent;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
 
 import javax.annotation.PostConstruct;
+
+import static javafx.beans.binding.Bindings.createBooleanBinding;
 
 /**
  * Root pane
@@ -32,10 +35,10 @@ import javax.annotation.PostConstruct;
 @FXMLComponent(location = "RootPane.fxml", resources = "com.cathive.fx.apps.contacts.Messages")
 public class RootPane extends AnchorPane {
 
-    @FXML
-    private ToolBar toolBar;
-    @FXML
-    private ListView<Person> contactListView;
+    @FXML private ToolBar toolBar;
+    @FXML private Button addButton;
+    @FXML private Button removeButton;
+    @FXML private ContactListView contactListView;
 
     @PostConstruct
     protected void init() {
@@ -50,6 +53,9 @@ public class RootPane extends AnchorPane {
 
         contactListView.getItems().add(p1);
         contactListView.getItems().add(p2);
+
+        removeButton.disableProperty().bind(createBooleanBinding(() -> contactListView.getSelectionModel().getSelectedItem() == null,
+                        contactListView.getSelectionModel().selectedItemProperty()));
 
     }
 

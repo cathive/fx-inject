@@ -34,7 +34,8 @@ limitations under the License.
       <top>
         <ToolBar fx:id="toolBar">
           <items>
-            <Button mnemonicParsing="false" text="Button"/>
+            <Button mnemonicParsing="false" text="Add" fx:id="addButton"/>
+            <Button mnemonicParsing="false" text="Remove" fx:id="removeButton"/>
           </items>
         </ToolBar>
       </top>

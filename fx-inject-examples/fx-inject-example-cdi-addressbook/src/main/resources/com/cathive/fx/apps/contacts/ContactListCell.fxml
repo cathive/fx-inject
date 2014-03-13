@@ -25,7 +25,7 @@ limitations under the License.
 <?import javafx.scene.text.Font?>
 <fx:root spacing="8.0" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label contentDisplay="GRAPHIC_ONLY">
+    <Label contentDisplay="GRAPHIC_ONLY" styleClass="contact-list-cell-image-label">
       <graphic>
         <ImageView fx:id="contactImageView" pickOnBounds="true" preserveRatio="true">
           <viewport>
