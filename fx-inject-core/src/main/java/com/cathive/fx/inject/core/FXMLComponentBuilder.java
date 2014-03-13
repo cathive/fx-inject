@@ -16,7 +16,6 @@
 
 package com.cathive.fx.inject.core;
 
-import com.cathive.fx.inject.core.util.StringConverterRetriever;
 import javafx.util.Builder;
 import javafx.util.StringConverter;
 
@@ -42,13 +41,18 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
 
     private final Map<String, Object> componentProperties = new HashMap<>();
 
+    /**
+     * Constructs a new component builder for the given class.
+     * @param componentClass
+     *         Class to be used when constructing new instances.
+     */
     protected FXMLComponentBuilder(final Class<T> componentClass) {
         super();
         this.componentClass = componentClass;
     }
 
     @Override
-    public Object put(String key, Object value) {
+    public Object put(final String key, final Object value) {
         componentProperties.put(key, value);
         return null;
     }
@@ -61,7 +65,7 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
     @Override
     public T build() {
         final T component = getInstance(this.componentClass);
-        for (String key : componentProperties.keySet()) {
+        for (final String key : componentProperties.keySet()) {
             final Object value = componentProperties.get(key);
             final String setterName = String.format("set%s%s", key.substring(0, 1).toUpperCase(), key.substring(1));
             try {
@@ -84,7 +88,7 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
                     paramValue = stringConverter.fromString((String) value);
                 }
                 setterMethod.invoke(component, paramValue);
-            } catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
+            } catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -101,11 +105,23 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
      */
     protected abstract <T> T getInstance(Class<T> clazz);
 
-    private StringConverter<?> getStringConverter(Class<?> valueClass) throws InstantiationException, IllegalAccessException {
+    /**
+     * Retrieves a {@link javafx.util.StringConverter} instance for the given class.
+     * @param valueClass
+     *         Class to be used when looking for a matching string converter.
+     * @return
+     *         A string converter that can handle values of the given class.
+     */
+    private StringConverter<?> getStringConverter(final Class<?> valueClass) {
         Class<? extends StringConverter<?>> aClass = StringConverterRetriever.retrieveConverterFor(valueClass);
-        if (aClass == null)
+        if (aClass == null) {
             throw new IllegalArgumentException(String.format("Can't find StringConverter for class '%s'.", valueClass.getName()));
-        return aClass.newInstance();
+        }
+        try {
+            return aClass.newInstance();
+        } catch (final InstantiationException | IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
 
