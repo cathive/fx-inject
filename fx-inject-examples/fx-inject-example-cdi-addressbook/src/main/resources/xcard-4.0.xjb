@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               extensionBindingPrefixes="xjc"
+               version="2.2">
+
+    <jaxb:bindings schemaLocation="xcard-4.0.xsd" node="/xsd:schema">
+        <jaxb:globalBindings typesafeEnumMaxMembers="1024">
+            <xjc:serializable/>
+            <xjc:simple/>
+            <jaxb:serializable uid="4000"/>
+        </jaxb:globalBindings>
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.cathive.fx.contacts.xcard4"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

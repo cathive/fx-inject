@@ -38,7 +38,7 @@ public class Person extends Contact
 
     private final StringProperty lastName = new SimpleStringProperty(this, LAST_NAME_PROPERTY);
     private final StringProperty firstName = new SimpleStringProperty(this, FIRST_NAME_PROPERTY);
-    private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>(this, SEX_PROPERTY);
+    private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>(this, SEX_PROPERTY, Sex.NOT_KNOWN);
     private final ReadOnlyStringWrapper salutation = new ReadOnlyStringWrapper(this, SALUTATION_PROPERTY);
 
     public Person() {

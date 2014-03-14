@@ -16,7 +16,7 @@
 
 package com.cathive.fx.apps.contacts;
 
-import com.cathive.fx.apps.contacts.model.Person;
+import com.cathive.fx.apps.contacts.model.Contact;
 import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -37,21 +37,19 @@ import javax.enterprise.context.Dependent;
 @FXMLComponent(location = "ContactListCell.fxml")
 public class ContactListCell extends HBox {
 
-    public static final String PERSON_PROPERTY = "person";
+    public static final String CONTACT_PROPERTY = "contact";
 
-    private final ObjectProperty<Person> person = new SimpleObjectProperty<>(this, PERSON_PROPERTY);
+    private final ObjectProperty<Contact> contact = new SimpleObjectProperty<>(this, CONTACT_PROPERTY);
 
-    @FXML
-    private Label displayNameLabel;
-    @FXML
-    private ImageView contactNameLabel;
+    @FXML private Label displayNameLabel;
+    @FXML private ImageView contactImageView;
 
-    public ObjectProperty<Person> personProperty() {
-        return this.person;
+    public ObjectProperty<Contact> contactProperty() {
+        return this.contact;
     }
 
-    public Person getPerson() {
-        return this.person.get();
+    public Contact getContact() {
+        return this.contact.get();
     }
 
 
@@ -59,8 +57,8 @@ public class ContactListCell extends HBox {
     protected void init() {
         this.displayNameLabel.textProperty().bind(
                 Bindings.createObjectBinding(
-                        () -> this.getPerson() == null ? "" : this.getPerson().getDisplayName(),
-                        this.person));
+                        () -> this.getContact() == null ? "" : this.getContact().getDisplayName(),
+                        this.contact));
     }
 
 
