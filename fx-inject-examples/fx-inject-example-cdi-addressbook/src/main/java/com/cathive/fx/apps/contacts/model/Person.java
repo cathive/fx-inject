@@ -16,11 +16,9 @@
 
 package com.cathive.fx.apps.contacts.model;
 
+import javafx.beans.NamedArg;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.io.Serializable;
 
@@ -30,30 +28,44 @@ import java.io.Serializable;
  * @author Benjamin P. Jung
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Person implements Serializable {
+public class Person extends Contact
+                    implements Serializable {
 
     public static final String LAST_NAME_PROPERTY = "lastName";
-
     public static final String FIRST_NAME_PROPERTY = "firstName";
-
-    public static final String DISPLAY_NAME_PROPERTY = "displayName";
-
-    public final ReadOnlyStringWrapper displayName = new ReadOnlyStringWrapper(this, DISPLAY_NAME_PROPERTY);
-
-    private final StringProperty firstName = new SimpleStringProperty(this, FIRST_NAME_PROPERTY);
+    public static final String SEX_PROPERTY = "sex";
+    public static final String SALUTATION_PROPERTY = "salutation";
 
     private final StringProperty lastName = new SimpleStringProperty(this, LAST_NAME_PROPERTY);
+    private final StringProperty firstName = new SimpleStringProperty(this, FIRST_NAME_PROPERTY);
+    private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>(this, SEX_PROPERTY);
+    private final ReadOnlyStringWrapper salutation = new ReadOnlyStringWrapper(this, SALUTATION_PROPERTY);
 
     public Person() {
+
         super();
+
         this.displayName.bind(
                 Bindings.createObjectBinding(() -> this.getLastName() + ", " + this.getFirstName(),
                         this.lastName,
                         this.firstName));
+
+        this.salutation.bind(
+                Bindings.createStringBinding(() -> this.getSex() == Sex.MALE ? "Mr." : this.getSex() == Sex.FEMALE ? "Mrs." : "",
+                        this.sex));
+
     }
 
 
-    //<editor-fold defaultstate="collapsed" desc="Setters, getters and property accessors">
+    public Person(@NamedArg(FIRST_NAME_PROPERTY) final String firstName,
+                  @NamedArg(LAST_NAME_PROPERTY) final String lastName) {
+        this();
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+    }
+
+
+    // <editor-fold defaultstate="collapsed" desc="Bean Properties">
 
     public StringProperty lastNameProperty() {
         return this.lastName;
@@ -79,12 +91,30 @@ public class Person implements Serializable {
         this.firstName.set(firstName);
     }
 
-    public ReadOnlyStringProperty displayNameProperty() {
-        return this.displayName.getReadOnlyProperty();
+    public Sex getSex() {
+        return this.sex.get();
     }
 
-    public String getDisplayName() {
-        return this.displayName.get();
+    public void setSex(final Sex sex) {
+        this.sex.set(sex);
     }
+
+    public ObjectProperty<Sex> sexProperty() {
+        return this.sex;
+    }
+
+    // </editor-fold>
+
+
+    // <editor-fold defaultstate="collapsed" desc="Pseudo / compound properties">
+
+    public ReadOnlyStringProperty salutationProperty() {
+        return this.salutation.getReadOnlyProperty();
+    }
+
+    public String getSalutation() {
+        return this.salutation.get();
+    }
+
     // </editor-fold>
 }
