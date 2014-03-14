@@ -19,19 +19,15 @@ package com.cathive.fx.cdi;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hamcrest.CoreMatchers;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.testng.PowerMockTestCase;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 import java.util.function.Consumer;
 
 import static com.cathive.fx.cdi.SimpleFXMLComponentTest.ComponentTestImpl.uiFinishedListener;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 
 /**
  * Checks if a basic FXML component can be injected via CDI.
@@ -39,14 +35,13 @@ import static org.testng.Assert.assertNull;
  * @author Alexander Erben
  */
 @Test
-@PrepareForTest({FxCdiExtension.class, Application.class})
-public class SimpleFXMLComponentTest extends PowerMockTestCase{
+public class SimpleFXMLComponentTest {
 
     @Test
     public void testInit() throws Exception {
-        assertNull(FxCdiExtension.getJavaFxApplication());
         uiFinishedListener = (Stage uut) -> {
-            assertNotNull(FxCdiExtension.getJavaFxApplication());
+            SimpleFXMLComponent root = (SimpleFXMLComponent) uut.getScene().getRoot();
+            assertThat(root.getText(), is("Test"));
             uut.hide();
         };
         Application.launch(ComponentTestImpl.class);
@@ -60,7 +55,7 @@ public class SimpleFXMLComponentTest extends PowerMockTestCase{
 
         @Override
         public void start(final Stage stage) throws Exception {
-            assertThat(component, CoreMatchers.notNullValue());
+            assertThat(component, notNullValue());
             assertThat(component.isHello(), is(true));
             component.setText("Test");
             stage.setScene(new Scene(component));
