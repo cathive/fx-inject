@@ -33,7 +33,7 @@ limitations under the License.
     <parent>
         <groupId>com.cathive</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>3</version>
+        <version>4</version>
     </parent>
 
     <modules>
@@ -60,9 +60,6 @@ limitations under the License.
 
         <!-- CDI implementation: Apache OpenWebBeans -->
         <openwebbeans.version>1.2.2</openwebbeans.version>
-
-        <!-- Guava (transitive dependency of JBoss WELD) -->
-        <guava.version>16.0.1</guava.version>
 
     </properties>
 
@@ -167,19 +164,6 @@ limitations under the License.
                 <groupId>org.jboss.weld</groupId>
                 <artifactId>weld-core-impl</artifactId>
                 <version>${weld.version}</version>
-                <exclusions>
-                    <!-- exclude vintage troublemaker guava version -->
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
             </dependency>
 
             <!-- CDI implementation: Apache OpenWebBeans -->
