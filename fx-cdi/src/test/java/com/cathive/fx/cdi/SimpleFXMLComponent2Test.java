@@ -32,7 +32,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author Alexander Erben
  */
-public class SimpleFXMLComponentTest {
+public class SimpleFXMLComponent2Test {
 
     @Test
     public void testInit() throws Exception {

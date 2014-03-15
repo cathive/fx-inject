@@ -203,4 +203,24 @@ limitations under the License.
 
     </dependencyManagement>
 
+    <build>
+        <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <compilerArgs>
+                    <arg>-XDignore.symbol.file</arg>
+                    <arg>-Xlint:unchecked</arg>
+                </compilerArgs>
+                <compilerId>javac</compilerId>
+                <compilerVersion>1.8</compilerVersion>
+                <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+        </plugins>
+    </build>
+
 </project>
