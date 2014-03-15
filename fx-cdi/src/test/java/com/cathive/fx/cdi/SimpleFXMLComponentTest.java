@@ -19,7 +19,7 @@ package com.cathive.fx.cdi;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import javax.inject.Inject;
 import java.util.function.Consumer;
@@ -34,7 +34,6 @@ import static org.junit.Assert.assertThat;
  *
  * @author Alexander Erben
  */
-@Test
 public class SimpleFXMLComponentTest {
 
     @Test
