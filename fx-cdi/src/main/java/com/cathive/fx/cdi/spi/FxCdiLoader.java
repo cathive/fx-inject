@@ -26,7 +26,7 @@ public interface FxCdiLoader {
     /**
      * Initializes the CDI provider instance.
      * <p>This method will be called upon initialization of CDI-based JavaFX applications.
-     * After this method has been executed successfully we assume that a workin CDI provider
+     * After this method has been executed successfully we assume that a working CDI provider
      * instance can be obtained via a call to {@link javax.enterprise.inject.spi.CDI#current()}.</p>
      * @throws Exception
      */
