@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>fx-inject-example-cdi-addressbook</module>
+        <module>addressbook-app</module>
     </modules>
 
 

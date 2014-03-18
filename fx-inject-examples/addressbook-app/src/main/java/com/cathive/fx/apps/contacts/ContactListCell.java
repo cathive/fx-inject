@@ -61,5 +61,4 @@ public class ContactListCell extends HBox {
                         this.contact));
     }
 
-
 }
