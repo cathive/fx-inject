@@ -39,17 +39,20 @@ limitations under the License.
           </items>
         </ToolBar>
       </top>
+      <left>
+          <ScrollPane minWidth="256" fitToHeight="true" fitToWidth="true">
+              <ContactListView fx:id="contactListView"/>
+          </ScrollPane>
+      </left>
       <center>
         <ContactDetailsPane fx:id="contactDetailsPane"/>
       </center>
-      <left>
-        <ScrollPane minWidth="256" fitToHeight="true" fitToWidth="true">
-          <ContactListView fx:id="contactListView"/>
-        </ScrollPane>
-      </left>
+
     </BorderPane>
   </children>
 
-  <fx:script source="RootPane.js"/>
+  <fx:script>
+      contactDetailsPane.contactProperty().bind(contactListView.selectedContactProperty());
+  </fx:script>
 
 </fx:root>

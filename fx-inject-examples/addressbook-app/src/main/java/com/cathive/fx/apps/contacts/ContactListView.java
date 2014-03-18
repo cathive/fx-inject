@@ -18,6 +18,12 @@ package com.cathive.fx.apps.contacts;
 
 import com.cathive.fx.apps.contacts.model.Contact;
 import com.cathive.fx.apps.contacts.model.Person;
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
@@ -29,6 +35,10 @@ import javax.enterprise.inject.spi.CDI;
  */
 public class ContactListView extends ListView<Contact> {
 
+    private final ObjectProperty<Contact> selectedContact = new SimpleObjectProperty<>(this, "selectedContact");
+    public Contact getSelectedContact() { return this.selectedContact.get(); }
+    public ReadOnlyObjectProperty<Contact> selectedContactProperty() { return this.selectedContact; }
+
     public ContactListView() {
         super();
         this.setCellFactory(listView -> {
@@ -38,6 +48,11 @@ public class ContactListView extends ListView<Contact> {
             listCell.setGraphic(graphics);
             return listCell;
         });
+
+        this.selectedContact.bind(Bindings.createObjectBinding(() -> this.getSelectionModel().getSelectedItem(),
+                this.selectionModelProperty(),
+                this.getSelectionModel().selectedItemProperty()));
+
     }
 
 }

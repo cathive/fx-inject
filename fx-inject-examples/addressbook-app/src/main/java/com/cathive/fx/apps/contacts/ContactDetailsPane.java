@@ -16,7 +16,13 @@
 
 package com.cathive.fx.apps.contacts;
 
+import com.cathive.fx.apps.contacts.model.Contact;
 import com.cathive.fx.inject.core.FXMLComponent;
+import javafx.beans.NamedArg;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -32,12 +38,27 @@ import javax.inject.Inject;
 public class ContactDetailsPane extends VBox {
 
     @Inject private Instance<ContactsApp> appInstance;
+
+    @FXML private Label displayNameLabel;
     @FXML private Label firstNameLabel;
     @FXML private Label lastNameLabel;
 
+    /** Contact to be displayed by this component (thus: the "model"). */
+    private final ObjectProperty<Contact> contact = new SimpleObjectProperty<>(this, "contact");
+    public void setContact(final Contact contact) { this.contact.set(contact); }
+    public Contact getContact() { return this.contact.get(); }
+    public ObjectProperty<Contact> contactProperty() { return this.contact; }
+
     public ContactDetailsPane() {
+
         super();
-        System.out.println(this);
+
+        this.contactProperty().addListener((observableValue, contact1, contact2) -> {
+            if (contact2 != null) {
+                this.displayNameLabel.textProperty().bind(contact2.displayNameProperty());
+            }
+            // TODO Handle null values.
+        });
     }
 
     @PostConstruct

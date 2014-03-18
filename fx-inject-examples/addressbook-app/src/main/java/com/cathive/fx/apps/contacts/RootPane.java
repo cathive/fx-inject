@@ -21,6 +21,9 @@ import com.cathive.fx.apps.contacts.model.Contact;
 import com.cathive.fx.apps.contacts.model.Person;
 import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
@@ -41,6 +44,9 @@ public class RootPane extends AnchorPane {
     @FXML private Button addButton;
     @FXML private Button removeButton;
     @FXML private ContactListView contactListView;
+    @FXML private ContactDetailsPane contactDetailsPane;
+
+    private final ReadOnlyObjectWrapper<Contact> selectedContact = new ReadOnlyObjectWrapper<>(this, "selectedContact");
 
     @PostConstruct
     protected void init() {
@@ -60,9 +66,13 @@ public class RootPane extends AnchorPane {
         contactListView.getItems().add(p2);
         contactListView.getItems().addAll(c1);
 
-        removeButton.disableProperty().bind(createBooleanBinding(() -> contactListView.getSelectionModel().getSelectedItem() == null,
-                        contactListView.getSelectionModel().selectedItemProperty()));
+        this.selectedContact.bind(contactListView.selectedContactProperty());
 
+        removeButton.disableProperty().bind(Bindings.isNull(selectedContactProperty()));
+    }
+
+    public ReadOnlyObjectProperty<Contact> selectedContactProperty() {
+        return this.selectedContact.getReadOnlyProperty();
     }
 
 }
