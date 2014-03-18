@@ -16,6 +16,7 @@
 
 package com.cathive.fx.inject.core;
 
+import javax.enterprise.inject.Stereotype;
 import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.*;
@@ -27,6 +28,7 @@ import static java.lang.annotation.ElementType.*;
  *
  * @author Benjamin P. Jung
  */
+@Stereotype
 @InterceptorBinding
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
