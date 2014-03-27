@@ -40,7 +40,7 @@ public class Company extends Contact
     // <editor-fold desc="Property: name">
     public static final String NAME_PROPERTY = "name";
     private final StringProperty name = new SimpleStringProperty(this, NAME_PROPERTY);
-    @Column
+    @Column(name = "name", nullable = false)
     public String getName() {
         return this.name.get();
     }

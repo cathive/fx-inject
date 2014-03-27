@@ -1,8 +1,9 @@
 package com.cathive.fx.apps.contacts.model;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -16,5 +17,21 @@ public class Family extends Contact
 
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;
+
+    // <editor-fold desc="Property: family name">
+    public static final String FAMILIY_NAME_PROPERTY = "familyName";
+    public final StringProperty familyName = new SimpleStringProperty(this, FAMILIY_NAME_PROPERTY);
+    @Basic
+    @Column(name = "family_name", nullable = false)
+    public String getFamilyName() {
+        return this.familyName.get();
+    }
+    public void setFamilyName(final String familyName) {
+        this.familyName.set(familyName);
+    }
+    public StringProperty familyNameProperty() {
+        return this.familyName;
+    }
+    // </editor-fold>
 
 }

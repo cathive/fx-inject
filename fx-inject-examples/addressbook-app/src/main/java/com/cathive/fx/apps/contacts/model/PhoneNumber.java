@@ -25,10 +25,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by benjamin.jung on 3/27/2014.
+ * @author Benjamin P. Jung
  */
 @Entity
-@Table(name = "phone_number")
+@Table(name = "phone")
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.CHAR)
+@DiscriminatorValue(value = "?")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class PhoneNumber implements Serializable {
 
     /** @see java.io.Serializable */
