@@ -16,8 +16,20 @@ public enum Sex {
 
     /** Numeric value according to ISO/IEC 5218. */
     private final int value;
+    public int getValue() { return this.value; }
     private Sex(final int value) {
         this.value = value;
+    }
+
+    public static Sex valueOf(final int value) {
+        switch (value) {
+            case 0: return NOT_KNOWN;
+            case 1: return MALE;
+            case 2: return FEMALE;
+            case 9: return NOT_APPLICABLE;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
 }

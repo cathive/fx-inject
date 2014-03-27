@@ -16,6 +16,7 @@
 
 package com.cathive.fx.apps.contacts.model;
 
+import com.cathive.fx.apps.contacts.model.converter.SexConverter;
 import javafx.beans.NamedArg;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
@@ -73,6 +74,7 @@ public class Person extends Contact
     public static final String SEX_PROPERTY = "sex";
     private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>(this, SEX_PROPERTY, Sex.NOT_KNOWN);
     @Column(name = "sex")
+    @Convert(converter = SexConverter.class)
     public Sex getSex() {
         return this.sex.get();
     }
@@ -96,20 +98,20 @@ public class Person extends Contact
     }
     // </editor-fold>
 
-    {
-        this.displayName.bind(
-                Bindings.createObjectBinding(() -> this.getLastName() + ", " + this.getFirstName(),
-                        this.lastName,
-                        this.firstName)
-        );
 
-        this.salutation.bind(
-                Bindings.createStringBinding(() -> this.getSex() == Sex.MALE ? "Mr." : this.getSex() == Sex.FEMALE ? "Mrs." : "",
-                        this.sex));
-    }
 
     public Person() {
         super();
+        // TODO Once the lines belows have been uncommented, JPA/EclipseLink in conjunction with JavaDB/Derby
+        //      no longer works. :-(
+//        this.displayName.bind(
+//                Bindings.createObjectBinding(() -> this.getLastName() + ", " + this.getFirstName(),
+//                        this.lastName,
+//                        this.firstName)
+//        );
+//        this.salutation.bind(
+//                Bindings.createStringBinding(() -> this.getSex() == Sex.MALE ? "Mr." : this.getSex() == Sex.FEMALE ? "Mrs." : "",
+//                        this.sex));
     }
 
 

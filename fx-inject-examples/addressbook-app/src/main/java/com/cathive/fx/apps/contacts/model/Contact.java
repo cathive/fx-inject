@@ -56,8 +56,13 @@ public class Contact implements Serializable {
     // <editor-fold desc="Pseudo-property: display name">
     public static final String DISPLAY_NAME_PROPERTY = "displayName";
     protected final ReadOnlyStringWrapper displayName = new ReadOnlyStringWrapper(this, DISPLAY_NAME_PROPERTY);
-    public ReadOnlyStringProperty displayNameProperty() { return this.displayName.getReadOnlyProperty(); }
-    @Transient public String getDisplayName() { return this.displayName.get(); }
+    public ReadOnlyStringProperty displayNameProperty() {
+        return this.displayName.getReadOnlyProperty();
+    }
+    @Transient
+    public String getDisplayName() {
+        return this.displayName.get();
+    }
     // </editor-fold>
 
     /*public static final String PHOTO_PROPERTY = "photo";
