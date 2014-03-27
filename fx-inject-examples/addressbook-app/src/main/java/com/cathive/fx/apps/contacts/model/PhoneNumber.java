@@ -16,7 +16,6 @@
 
 package com.cathive.fx.apps.contacts.model;
 
-import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyLongProperty;
 import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,45 +25,34 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @author Benjamin P. Jung
+ * Created by benjamin.jung on 3/27/2014.
  */
 @Entity
-@Table(name = "contact_company")
-@DiscriminatorValue(value = "C")
-public class Company extends Contact
-                     implements Serializable {
+@Table(name = "phone_number")
+public class PhoneNumber implements Serializable {
 
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;
 
-    // <editor-fold desc="Property: name">
-    public static final String NAME_PROPERTY = "name";
-    private final StringProperty name = new SimpleStringProperty(this, NAME_PROPERTY);
-    @Column
-    public String getName() {
-        return this.name.get();
-    }
-    public void setName(final String name) {
-        this.name.set(name);
-    }
-    public StringProperty nameProperty() {
-        return this.name;
-    }
-    // </editor-fold>
+    public static final String ID_PROPERTY = "id";
+    private final ReadOnlyLongWrapper id = new ReadOnlyLongWrapper(this, ID_PROPERTY);
+    public ReadOnlyLongProperty idProperty() { return this.id; }
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() { return this.id.get(); }
+    public void setId(final Long id) { this.id.set(id); }
 
-    {
-        // Display name == name for companies at the moment.
-        this.displayName.bind(this.name);
+    private final StringProperty countryCode = new SimpleStringProperty(this, "countryCode");
+    @Column(name = "cc")
+    public String getCountryCode() {
+        return this.countryCode.get();
     }
-
-
-    public Company() {
-        super();
+    public void setCountryCode(final String countryCode) {
+        this.countryCode.set(countryCode);
     }
-
-    public Company(@NamedArg(NAME_PROPERTY) final String name) {
-        this();
-        this.setName(name);
+    public StringProperty countryCodeProperty() {
+        return this.countryCode;
     }
 
 }

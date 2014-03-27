@@ -47,6 +47,36 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- JPA Persistence API -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <!-- JPA Persistence API implementation: Eclipselink -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Java Transaction API -->
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>1.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- JavaDB / Derby -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.10.1.1</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Unit tests -->
         <dependency>
             <groupId>org.testng</groupId>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="contacts" transaction-type="RESOURCE_LOCAL">
+        <description>Space Raccoons - Core - Model - Persistence Unit</description>
+        <mapping-file>META-INF/orm.xml</mapping-file>
+        <class>com.cathive.fx.apps.contacts.model.Contact</class>
+        <class>com.cathive.fx.apps.contacts.model.Company</class>
+        <class>com.cathive.fx.apps.contacts.model.Person</class>
+        <class>com.cathive.fx.apps.contacts.model.PhoneNumber</class>
+        <class>com.cathive.fx.apps.contacts.model.Sex</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>AUTO</validation-mode>
+        <properties>
+            <!-- Generic JPA configuration -->
+            <property name="javax.persistence.lock.timeout" value="1000"/>
+            <property name="javax.persistence.query.timeout" value="1000"/>
+            <!-- EclipseLink specific configuration -->
+            <property name="eclipselink.create-ddl-jdbc-file-name" value="contacts.ddl.jdbc"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
+            <!-- Hibernate specific configuration -->
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

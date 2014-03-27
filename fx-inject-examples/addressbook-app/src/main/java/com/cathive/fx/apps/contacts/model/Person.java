@@ -20,6 +20,7 @@ import javafx.beans.NamedArg;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -27,33 +28,88 @@ import java.io.Serializable;
  *
  * @author Benjamin P. Jung
  */
-@SuppressWarnings("UnusedDeclaration")
+@Entity
+@Table(name = "contact_person")
+@DiscriminatorValue(value = "P")
 public class Person extends Contact
                     implements Serializable {
 
+    /** @see java.io.Serializable */
+    private static final long serialVersionUid = 1L;
+
+    // <editor-fold desc="Property: last name">
     public static final String LAST_NAME_PROPERTY = "lastName";
-    public static final String FIRST_NAME_PROPERTY = "firstName";
-    public static final String SEX_PROPERTY = "sex";
-    public static final String SALUTATION_PROPERTY = "salutation";
-
     private final StringProperty lastName = new SimpleStringProperty(this, LAST_NAME_PROPERTY);
+    public StringProperty lastNameProperty() {
+        return this.lastName;
+    }
+
+    @Column(name = "last_name")
+    public String getLastName() {
+        return this.lastName.get();
+    }
+
+    public void setLastName(final String lastName) {
+        this.lastName.set(lastName);
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="Property: first name">
+    public static final String FIRST_NAME_PROPERTY = "firstName";
     private final StringProperty firstName = new SimpleStringProperty(this, FIRST_NAME_PROPERTY);
+    @Column(name = "first_name")
+    public String getFirstName() {
+        return this.firstName.get();
+    }
+    public void setFirstName(final String firstName) {
+        this.firstName.set(firstName);
+    }
+    public StringProperty firstNameProperty() {
+        return this.firstName;
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="Property: sex">
+    public static final String SEX_PROPERTY = "sex";
     private final ObjectProperty<Sex> sex = new SimpleObjectProperty<>(this, SEX_PROPERTY, Sex.NOT_KNOWN);
+    @Column(name = "sex")
+    public Sex getSex() {
+        return this.sex.get();
+    }
+    public void setSex(final Sex sex) {
+        this.sex.set(sex);
+    }
+    public ObjectProperty<Sex> sexProperty() {
+        return this.sex;
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="Pseudo-property: salutation">
+    public static final String SALUTATION_PROPERTY = "salutation";
     private final ReadOnlyStringWrapper salutation = new ReadOnlyStringWrapper(this, SALUTATION_PROPERTY);
+    @Transient
+    public String getSalutation() {
+        return this.salutation.get();
+    }
+    public ReadOnlyStringProperty salutationProperty() {
+        return this.salutation.getReadOnlyProperty();
+    }
+    // </editor-fold>
 
-    public Person() {
-
-        super();
-
+    {
         this.displayName.bind(
                 Bindings.createObjectBinding(() -> this.getLastName() + ", " + this.getFirstName(),
                         this.lastName,
-                        this.firstName));
+                        this.firstName)
+        );
 
         this.salutation.bind(
                 Bindings.createStringBinding(() -> this.getSex() == Sex.MALE ? "Mr." : this.getSex() == Sex.FEMALE ? "Mrs." : "",
                         this.sex));
+    }
 
+    public Person() {
+        super();
     }
 
 
@@ -64,57 +120,4 @@ public class Person extends Contact
         this.setLastName(lastName);
     }
 
-
-    // <editor-fold defaultstate="collapsed" desc="Bean Properties">
-
-    public StringProperty lastNameProperty() {
-        return this.lastName;
-    }
-
-    public String getLastName() {
-        return this.lastName.get();
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName.set(lastName);
-    }
-
-    public StringProperty firstNameProperty() {
-        return this.firstName;
-    }
-
-    public String getFirstName() {
-        return this.firstName.get();
-    }
-
-    public void setFirstName(final String firstName) {
-        this.firstName.set(firstName);
-    }
-
-    public Sex getSex() {
-        return this.sex.get();
-    }
-
-    public void setSex(final Sex sex) {
-        this.sex.set(sex);
-    }
-
-    public ObjectProperty<Sex> sexProperty() {
-        return this.sex;
-    }
-
-    // </editor-fold>
-
-
-    // <editor-fold defaultstate="collapsed" desc="Pseudo / compound properties">
-
-    public ReadOnlyStringProperty salutationProperty() {
-        return this.salutation.getReadOnlyProperty();
-    }
-
-    public String getSalutation() {
-        return this.salutation.get();
-    }
-
-    // </editor-fold>
 }
