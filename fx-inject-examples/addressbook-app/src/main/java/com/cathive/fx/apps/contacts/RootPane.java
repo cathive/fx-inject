@@ -18,6 +18,7 @@ package com.cathive.fx.apps.contacts;
 
 import com.cathive.fx.apps.contacts.model.Company;
 import com.cathive.fx.apps.contacts.model.Contact;
+import com.cathive.fx.apps.contacts.model.Family;
 import com.cathive.fx.apps.contacts.model.Person;
 import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.beans.binding.Bindings;
@@ -51,20 +52,12 @@ public class RootPane extends AnchorPane {
     @PostConstruct
     protected void init() {
 
-        final Person p1 = Contact.create(Person.class);
-        p1.setFirstName("John");
-        p1.setLastName("Doe");
-
-        final Person p2 = Contact.create(Person.class);
-        p2.setFirstName("Max");
-        p2.setLastName("Mustermann");
-
-        final Company c1 = Contact.create(Company.class);
-        c1.setName("Monster Inc.");
-
-        contactListView.getItems().add(p1);
-        contactListView.getItems().add(p2);
-        contactListView.getItems().addAll(c1);
+        // TODO Remove this dummy content.
+        contactListView.getItems().addAll(
+                new Person("John", "Doe"),
+                new Person("Max", "Mustermann"),
+                new Company("Monster Inc."),
+                new Family("Schmitz"));
 
         this.selectedContact.bind(contactListView.selectedContactProperty());
 

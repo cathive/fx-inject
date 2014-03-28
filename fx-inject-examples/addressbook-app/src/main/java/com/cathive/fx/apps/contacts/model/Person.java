@@ -24,6 +24,9 @@ import javafx.beans.property.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static javafx.beans.binding.Bindings.createObjectBinding;
+import static javafx.beans.binding.Bindings.createStringBinding;
+
 /**
  * Encapsulates a person entity.
  *
@@ -98,22 +101,9 @@ public class Person extends Contact
     }
     // </editor-fold>
 
-
-
     public Person() {
         super();
-        // TODO Once the lines belows have been uncommented, JPA/EclipseLink in conjunction with JavaDB/Derby
-        //      no longer works. :-(
-//        this.displayName.bind(
-//                Bindings.createObjectBinding(() -> this.getLastName() + ", " + this.getFirstName(),
-//                        this.lastName,
-//                        this.firstName)
-//        );
-//        this.salutation.bind(
-//                Bindings.createStringBinding(() -> this.getSex() == Sex.MALE ? "Mr." : this.getSex() == Sex.FEMALE ? "Mrs." : "",
-//                        this.sex));
     }
-
 
     public Person(@NamedArg(FIRST_NAME_PROPERTY) final String firstName,
                   @NamedArg(LAST_NAME_PROPERTY) final String lastName) {

@@ -1,5 +1,6 @@
 package com.cathive.fx.apps.contacts.model;
 
+import javafx.beans.NamedArg;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -33,5 +34,15 @@ public class Family extends Contact
         return this.familyName;
     }
     // </editor-fold>
+
+
+    public Family() {
+        super();
+    }
+
+    public Family(@NamedArg(FAMILIY_NAME_PROPERTY) final String familyName) {
+        this();
+        this.setFamilyName(familyName);
+    }
 
 }

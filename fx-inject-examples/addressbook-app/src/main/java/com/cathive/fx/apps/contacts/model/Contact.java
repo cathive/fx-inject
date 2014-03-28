@@ -31,39 +31,11 @@ import java.util.UUID;
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.CHAR)
 @DiscriminatorValue(value = "?")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Contact implements Serializable {
+public abstract class Contact extends AbstractEntity
+                              implements Serializable {
 
     /** @see java.io.Serializable */
     private static final long serialVersionUID = 1L;
-
-    // <editor-fold desc="Property: ID">
-    public static final String ID_PROPERTY = "id";
-    private final ReadOnlyLongWrapper id = new ReadOnlyLongWrapper(this, ID_PROPERTY);
-    public ReadOnlyLongProperty idProperty() {
-        return this.id;
-    }
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return this.id.get();
-    }
-    public void setId(final Long id) {
-        this.id.set(id);
-    }
-    // </editor-fold>
-
-    // <editor-fold desc="Pseudo-property: display name">
-    public static final String DISPLAY_NAME_PROPERTY = "displayName";
-    protected final ReadOnlyStringWrapper displayName = new ReadOnlyStringWrapper(this, DISPLAY_NAME_PROPERTY);
-    public ReadOnlyStringProperty displayNameProperty() {
-        return this.displayName.getReadOnlyProperty();
-    }
-    @Transient
-    public String getDisplayName() {
-        return this.displayName.get();
-    }
-    // </editor-fold>
 
     /*public static final String PHOTO_PROPERTY = "photo";
     private final ObjectProperty<Image> photo = new SimpleObjectProperty<>(this, PHOTO_PROPERTY);
@@ -84,6 +56,11 @@ public class Contact implements Serializable {
             throw new IllegalStateException(e);
         }
         return contact;
+    }
+
+    @FunctionalInterface
+    interface DisplayNameRenderer<C extends Contact> {
+        StringProperty displayName(C contact);
     }
 
 }

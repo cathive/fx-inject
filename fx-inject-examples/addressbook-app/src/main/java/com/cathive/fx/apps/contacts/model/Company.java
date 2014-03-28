@@ -52,11 +52,6 @@ public class Company extends Contact
     }
     // </editor-fold>
 
-    {
-        // Display name == name for companies at the moment.
-        this.displayName.bind(this.name);
-    }
-
 
     public Company() {
         super();

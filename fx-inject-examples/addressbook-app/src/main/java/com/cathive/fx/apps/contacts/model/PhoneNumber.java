@@ -16,8 +16,6 @@
 
 package com.cathive.fx.apps.contacts.model;
 
-import javafx.beans.property.ReadOnlyLongProperty;
-import javafx.beans.property.ReadOnlyLongWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -32,20 +30,13 @@ import java.io.Serializable;
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.CHAR)
 @DiscriminatorValue(value = "?")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class PhoneNumber implements Serializable {
+public class PhoneNumber extends AbstractEntity
+                         implements Serializable {
 
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;
 
-    public static final String ID_PROPERTY = "id";
-    private final ReadOnlyLongWrapper id = new ReadOnlyLongWrapper(this, ID_PROPERTY);
-    public ReadOnlyLongProperty idProperty() { return this.id; }
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() { return this.id.get(); }
-    public void setId(final Long id) { this.id.set(id); }
-
+    // <editor-fold desc="Property: country code (CC)">
     private final StringProperty countryCode = new SimpleStringProperty(this, "countryCode");
     @Column(name = "cc")
     public String getCountryCode() {
@@ -57,5 +48,6 @@ public class PhoneNumber implements Serializable {
     public StringProperty countryCodeProperty() {
         return this.countryCode;
     }
+    // </editor-fold>
 
 }
