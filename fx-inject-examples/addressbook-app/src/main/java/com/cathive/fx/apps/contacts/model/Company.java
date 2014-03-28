@@ -37,6 +37,21 @@ public class Company extends Contact
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;
 
+    public Company() {
+        super();
+    }
+
+    public Company(@NamedArg(NAME_PROPERTY) final String name) {
+        this();
+        this.setName(name);
+    }
+
+
+    @Override
+    public ContactType getType() {
+        return ContactType.COMPANY;
+    }
+
     // <editor-fold desc="Property: name">
     public static final String NAME_PROPERTY = "name";
     private final StringProperty name = new SimpleStringProperty(this, NAME_PROPERTY);
@@ -51,15 +66,5 @@ public class Company extends Contact
         return this.name;
     }
     // </editor-fold>
-
-
-    public Company() {
-        super();
-    }
-
-    public Company(@NamedArg(NAME_PROPERTY) final String name) {
-        this();
-        this.setName(name);
-    }
 
 }

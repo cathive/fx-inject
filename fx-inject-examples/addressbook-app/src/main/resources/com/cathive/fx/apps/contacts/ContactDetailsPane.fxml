@@ -36,11 +36,9 @@ limitations under the License.
             <Button contentDisplay="GRAPHIC_ONLY" graphicTextGap="0.0" mnemonicParsing="false"
                     HBox.hgrow="ALWAYS">
               <graphic>
-                <ImageView fx:id="contactImageView" pickOnBounds="true" preserveRatio="true"
-                           styleClass="button" HBox.hgrow="ALWAYS">
-                  <viewport>
-                    <Rectangle2D height="64.0" minX="64.0" minY="6.0" width="64.0"/>
-                  </viewport>
+                <ImageView fx:id="photoImageView" pickOnBounds="true" preserveRatio="true"
+                           smooth="true" cache="true"
+                           styleClass="button" HBox.hgrow="ALWAYS" fitWidth="64.0" fitHeight="64.0">
                 </ImageView>
               </graphic>
             </Button>

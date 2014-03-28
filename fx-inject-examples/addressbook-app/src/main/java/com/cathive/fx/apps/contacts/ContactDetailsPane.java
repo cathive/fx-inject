@@ -18,13 +18,14 @@ package com.cathive.fx.apps.contacts;
 
 import com.cathive.fx.apps.contacts.model.Contact;
 import com.cathive.fx.inject.core.FXMLComponent;
-import javafx.beans.NamedArg;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import javax.annotation.PostConstruct;
@@ -38,10 +39,26 @@ import javax.inject.Inject;
 public class ContactDetailsPane extends VBox {
 
     @Inject private Instance<ContactsApp> appInstance;
+    @Inject private ContactRendererFactory displayNameRenderers;
 
     @FXML private Label displayNameLabel;
     @FXML private Label firstNameLabel;
     @FXML private Label lastNameLabel;
+    @FXML private ImageView photoImageView;
+
+    // <editor-fold desc="Property: read only">
+    public static final String READ_ONLY_PROPERTY = "readOnly";
+    private final BooleanProperty readOnly = new SimpleBooleanProperty(this, READ_ONLY_PROPERTY);
+    public boolean isReadOnly() {
+        return this.readOnly.get();
+    }
+    public void setReadOnly(final boolean readOnly) {
+        this.readOnly.set(readOnly);
+    }
+    public BooleanProperty readOnlyBooleanProperty() {
+        return this.readOnly;
+    }
+    // </editor-fold>
 
     /** Contact to be displayed by this component (thus: the "model"). */
     private final ObjectProperty<Contact> contact = new SimpleObjectProperty<>(this, "contact");
@@ -50,20 +67,27 @@ public class ContactDetailsPane extends VBox {
     public ObjectProperty<Contact> contactProperty() { return this.contact; }
 
     public ContactDetailsPane() {
-
         super();
-
-        this.contactProperty().addListener((observableValue, contact1, contact2) -> {
-            if (contact2 != null) {
-                this.displayNameLabel.textProperty().bind(contact2.displayNameProperty());
-            }
-            // TODO Handle null values.
-        });
     }
 
     @PostConstruct
-    public void init() {
-        System.out.println(appInstance);
+    protected void init() {
+
+        this.contactProperty().addListener((observableValue, contact1, contact2) -> {
+            this.displayNameLabel.textProperty().unbind();
+            if (contact2 == null) {
+                this.displayNameLabel.setText("");
+                this.photoImageView.setImage(null);
+            } else {
+                this.displayNameLabel.textProperty().bind(this.displayNameRenderers.createDisplayNameBinding(contact2));
+                this.photoImageView.imageProperty().bind(Bindings.createObjectBinding(() ->
+                                contact2.getPhoto() != null ? contact2.getPhoto()
+                                        : this.displayNameRenderers.getDefaultPhoto(contact2),
+                        contact2.photoProperty()
+                ));
+            }
+        });
+
     }
 
 }

@@ -19,6 +19,23 @@ public class Family extends Contact
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;
 
+
+    public Family() {
+        super();
+    }
+
+    public Family(@NamedArg(FAMILIY_NAME_PROPERTY) final String familyName) {
+        this();
+        this.setFamilyName(familyName);
+    }
+
+
+    @Override
+    public ContactType getType() {
+        return ContactType.FAMILY;
+    }
+
+
     // <editor-fold desc="Property: family name">
     public static final String FAMILIY_NAME_PROPERTY = "familyName";
     public final StringProperty familyName = new SimpleStringProperty(this, FAMILIY_NAME_PROPERTY);
@@ -34,15 +51,5 @@ public class Family extends Contact
         return this.familyName;
     }
     // </editor-fold>
-
-
-    public Family() {
-        super();
-    }
-
-    public Family(@NamedArg(FAMILIY_NAME_PROPERTY) final String familyName) {
-        this();
-        this.setFamilyName(familyName);
-    }
 
 }

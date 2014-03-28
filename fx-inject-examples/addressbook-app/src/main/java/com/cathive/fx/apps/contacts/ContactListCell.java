@@ -23,11 +23,14 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import java.util.concurrent.Callable;
 
 /**
  * List cell to display contacts.
@@ -40,6 +43,8 @@ public class ContactListCell extends HBox {
     public static final String CONTACT_PROPERTY = "contact";
 
     private final ObjectProperty<Contact> contact = new SimpleObjectProperty<>(this, CONTACT_PROPERTY);
+
+    @Inject private ContactRendererFactory displayNameRenderers;
 
     @FXML private Label displayNameLabel;
     @FXML private ImageView contactImageView;
@@ -55,10 +60,20 @@ public class ContactListCell extends HBox {
 
     @PostConstruct
     protected void init() {
-        this.displayNameLabel.textProperty().bind(
-                Bindings.createObjectBinding(
-                        () -> this.getContact() == null ? "" : this.getContact().getDisplayName(),
-                        this.contact));
+        this.contact.addListener((observableValue, contact1, contact2) -> {
+           this.displayNameLabel.textProperty().unbind();
+            this.contactImageView.imageProperty().unbind();
+           if (contact2 == null) {
+               this.displayNameLabel.setText("");
+               this.contactImageView.setImage(null);
+           } else {
+               this.displayNameLabel.textProperty().bind(displayNameRenderers.createDisplayNameBinding(contact2));
+               this.contactImageView.imageProperty().bind(Bindings.createObjectBinding(() ->
+                               contact2.getPhoto() != null ? contact2.getPhoto()
+                                                           :  this.displayNameRenderers.getDefaultPhoto(contact2),
+                       contact2.photoProperty()));
+           }
+        });
     }
 
 }

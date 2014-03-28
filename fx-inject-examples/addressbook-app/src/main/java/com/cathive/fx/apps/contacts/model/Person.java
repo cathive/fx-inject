@@ -41,18 +41,34 @@ public class Person extends Contact
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;
 
+
+    public Person() {
+        super();
+    }
+
+    public Person(@NamedArg(FIRST_NAME_PROPERTY) final String firstName,
+                  @NamedArg(LAST_NAME_PROPERTY) final String lastName) {
+        this();
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+    }
+
+
+    @Override
+    public ContactType getType() {
+        return ContactType.PERSON;
+    }
+
     // <editor-fold desc="Property: last name">
     public static final String LAST_NAME_PROPERTY = "lastName";
     private final StringProperty lastName = new SimpleStringProperty(this, LAST_NAME_PROPERTY);
     public StringProperty lastNameProperty() {
         return this.lastName;
     }
-
     @Column(name = "last_name")
     public String getLastName() {
         return this.lastName.get();
     }
-
     public void setLastName(final String lastName) {
         this.lastName.set(lastName);
     }
@@ -100,16 +116,5 @@ public class Person extends Contact
         return this.salutation.getReadOnlyProperty();
     }
     // </editor-fold>
-
-    public Person() {
-        super();
-    }
-
-    public Person(@NamedArg(FIRST_NAME_PROPERTY) final String firstName,
-                  @NamedArg(LAST_NAME_PROPERTY) final String lastName) {
-        this();
-        this.setFirstName(firstName);
-        this.setLastName(lastName);
-    }
 
 }

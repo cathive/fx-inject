@@ -16,12 +16,13 @@
 
 package com.cathive.fx.apps.contacts.model;
 
-import javafx.beans.property.*;
+import com.cathive.fx.apps.contacts.model.converter.ImageConverter;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * @author Benjamin P. Jung
@@ -37,16 +38,30 @@ public abstract class Contact extends AbstractEntity
     /** @see java.io.Serializable */
     private static final long serialVersionUID = 1L;
 
-    /*public static final String PHOTO_PROPERTY = "photo";
+    // <editor-fold desc="Property: photo">
+    public static final String PHOTO_PROPERTY = "photo";
     private final ObjectProperty<Image> photo = new SimpleObjectProperty<>(this, PHOTO_PROPERTY);
-    public ObjectProperty photoProperty() { return this.photo; }
-    public Image getPhoto() { return this.photo.get(); }
-    public void setPhoto(final Image photo) { this.photo.set(photo); }*/
+    public ObjectProperty<Image> photoProperty() {
+        return this.photo;
+    }
+    @Column(name = "photo_data")
+    @Convert(converter = ImageConverter.class)
+    public Image getPhoto() {
+        return this.photo.get();
+    }
+    public void setPhoto(final Image photo) {
+        this.photo.set(photo);
+    }
+    // </editor-fold>
 
 
     public Contact() {
         super();
     }
+
+
+    @Transient
+    public abstract ContactType getType();
 
     public static <T extends Contact> T create(final Class<T> contactType) {
         final T contact;
@@ -56,11 +71,6 @@ public abstract class Contact extends AbstractEntity
             throw new IllegalStateException(e);
         }
         return contact;
-    }
-
-    @FunctionalInterface
-    interface DisplayNameRenderer<C extends Contact> {
-        StringProperty displayName(C contact);
     }
 
 }

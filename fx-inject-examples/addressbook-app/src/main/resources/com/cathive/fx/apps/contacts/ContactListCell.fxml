@@ -28,10 +28,7 @@ limitations under the License.
   <children>
     <Label contentDisplay="GRAPHIC_ONLY" styleClass="contact-list-cell-image-label">
       <graphic>
-        <ImageView fx:id="contactImageView" pickOnBounds="true" preserveRatio="true">
-          <viewport>
-            <Rectangle2D height="48.0" minX="48.0" minY="48.0" width="48.0"/>
-          </viewport>
+        <ImageView fx:id="contactImageView" pickOnBounds="true" preserveRatio="true" smooth="true" cache="true" fitWidth="48.0" fitHeight="48.0">
         </ImageView>
       </graphic>
     </Label>

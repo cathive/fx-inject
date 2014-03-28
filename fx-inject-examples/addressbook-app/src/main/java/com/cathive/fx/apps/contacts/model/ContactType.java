@@ -23,6 +23,8 @@ public enum ContactType {
 
     PERSON,
 
-    COMPANY
+    COMPANY,
+
+    FAMILY;
 
 }

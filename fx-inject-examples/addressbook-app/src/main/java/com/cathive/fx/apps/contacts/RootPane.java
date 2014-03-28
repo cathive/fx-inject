@@ -28,6 +28,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 import javax.annotation.PostConstruct;
@@ -58,6 +59,9 @@ public class RootPane extends AnchorPane {
                 new Person("Max", "Mustermann"),
                 new Company("Monster Inc."),
                 new Family("Schmitz"));
+        final Person chuckNorris = new Person("Chuck", "Norris");
+        chuckNorris.setPhoto(new Image("http://www.biography.com/imported/images/Biography/Images/Profiles/N/Chuck-Norris-15720761-1-402.jpg"));
+        contactListView.getItems().add(chuckNorris);
 
         this.selectedContact.bind(contactListView.selectedContactProperty());
 

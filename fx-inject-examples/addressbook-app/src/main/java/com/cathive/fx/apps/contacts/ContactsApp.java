@@ -21,6 +21,7 @@ import com.cathive.fx.apps.contacts.model.Person;
 import com.cathive.fx.cdi.CdiApplication;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import javax.enterprise.inject.Produces;
@@ -48,7 +49,9 @@ public class ContactsApp extends CdiApplication {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
+
         primaryStage.setTitle(messages.getString(Messages.APP_TITLE));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/cathive/fx/apps/contacts/icons/x-office-address-book.png")));
 
         final Scene scene = new Scene(this.rootPane);
         scene.getStylesheets().add(getClass().getResource("ContactsApp.css").toExternalForm());
