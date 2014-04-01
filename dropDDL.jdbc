@@ -1,0 +1,10 @@
+ALTER TABLE contact_company DROP CONSTRAINT contact_company_id
+ALTER TABLE contact_person DROP CONSTRAINT contact_person_id
+ALTER TABLE phone_mobile DROP CONSTRAINT FK_phone_mobile_id
+ALTER TABLE contact_family DROP CONSTRAINT contact_family_id
+DROP TABLE contact
+DROP TABLE contact_company
+DROP TABLE contact_person
+DROP TABLE phone
+DROP TABLE phone_mobile
+DROP TABLE contact_family
