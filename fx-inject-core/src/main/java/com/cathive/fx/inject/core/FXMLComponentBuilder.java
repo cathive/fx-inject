@@ -16,12 +16,15 @@
 
 package com.cathive.fx.inject.core;
 
-import javafx.util.Builder;
-import javafx.util.StringConverter;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javafx.util.Builder;
+import javafx.util.StringConverter;
 
 /**
  * Abstract base class for all component builders that use
@@ -31,6 +34,8 @@ import java.util.*;
  * StringConverters in a Map seems a duplicate of what has already been implemented
  * in the JavaFX runtime.
  * A better solution may follow in the future.
+ *
+ * @param <T> Type of the class to be constructed.
  *
  * @author Benjamin P. Jung
  * @since 1.1.0
@@ -99,11 +104,10 @@ public abstract class FXMLComponentBuilder<T> extends AbstractMap<String, Object
      * Returns an instance of the requested class from the dependency injection framework being used.
      *
      * @param clazz Class to be constructed via DI container.
-     * @param <T>   Type of the class to be constructed.
      * @return An instance of the requested class that has been fetched
      * via the concrete implementation of DI container being used.
      */
-    protected abstract <T> T getInstance(Class<T> clazz);
+    protected abstract T getInstance(Class<T> clazz);
 
     /**
      * Retrieves a {@link javafx.util.StringConverter} instance for the given class.

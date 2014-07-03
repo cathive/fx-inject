@@ -21,7 +21,7 @@ package com.cathive.fx.cdi.spi;
  * implementations into the {@link com.cathive.fx.cdi.CdiApplication} class.
  * @author Benjamin P. Jung
  */
-public interface FxCdiLoader {
+public interface CDILoader {
 
     /**
      * Initializes the CDI provider instance.

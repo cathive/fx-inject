@@ -16,18 +16,21 @@
 
 package com.cathive.fx.cdi;
 
-import com.cathive.fx.inject.core.FXMLLoaderParams;
-import javafx.fxml.FXMLLoader;
+import static com.cathive.fx.cdi.CdiFXMLLoader.CHARSET_UNSPECIFIED;
+import static com.cathive.fx.cdi.CdiFXMLLoader.LOCATION_UNSPECIFIED;
+import static com.cathive.fx.cdi.CdiFXMLLoader.RESOURCES_UNSPECIFIED;
 
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ResourceBundle;
 import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ResourceBundle;
 
-import static com.cathive.fx.cdi.CdiFXMLLoader.*;
+import com.cathive.fx.inject.core.FXMLLoaderParams;
+
+import javafx.fxml.FXMLLoader;
 
 /**
  * This factory is responsible for the production of CDI-aware {@link javafx.fxml.FXMLLoader} instances.
@@ -35,7 +38,7 @@ import static com.cathive.fx.cdi.CdiFXMLLoader.*;
  * @author Benjamin P. Jung
  * @since 1.0.0
  */
-class FXMLLoaderFactory {
+class CdiFXMLLoaderFactory {
 
     /**
      * Create an CDI-aware FXMLLoader.

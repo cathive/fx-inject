@@ -16,9 +16,9 @@
 
 package com.cathive.fx.cdi;
 
-import com.cathive.fx.inject.core.FXMLComponentBuilder;
-
 import javax.enterprise.inject.spi.CDI;
+
+import com.cathive.fx.inject.core.FXMLComponentBuilder;
 
 /**
  * Component builder for CDI-managed components.
@@ -37,7 +37,7 @@ public class CdiFXMLComponentBuilder<T> extends FXMLComponentBuilder<T> {
     }
 
     @Override
-    protected <T> T getInstance(Class<T> clazz) {
+    protected T getInstance(Class<T> clazz) {
         return CDI.current().select(clazz).get();
     }
 

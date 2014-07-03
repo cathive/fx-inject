@@ -16,7 +16,7 @@
 
 package com.cathive.fx.cdi.weld;
 
-import com.cathive.fx.cdi.spi.FxCdiLoader;
+import com.cathive.fx.cdi.spi.CDILoader;
 import org.jboss.weld.environment.se.Weld;
 
 import java.util.logging.Level;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 /**
  * @author Benjamin P. Jung
  */
-public class WeldFxCdiLoader implements FxCdiLoader {
+public class WeldLoader implements CDILoader {
 
     /** Logger for this instance. */
     private final Logger logger = Logger.getLogger(this.getClass().getName());

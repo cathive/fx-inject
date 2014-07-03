@@ -16,9 +16,8 @@
 
 package com.cathive.fx.cdi;
 
-import com.cathive.fx.cdi.spi.FxCdiLoader;
+import com.cathive.fx.cdi.spi.CDILoader;
 import javafx.application.Application;
-import javafx.application.Platform;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
@@ -26,29 +25,29 @@ import java.util.ServiceLoader;
 /**
  * The purpose of this (abstract) class is to mark JavaFX applications that utilize CDI.
  *
- * <p>Make sure that you have an implementation of the {@link com.cathive.fx.cdi.spi.FxCdiLoader}
+ * <p>Make sure that you have an implementation of the {@link com.cathive.fx.cdi.spi.CDILoader}
  * on your classpath and it will be automatically picked up during initialization of the app.</p>
  * @author Benjamin P. Jung
  * @since 1.0.0
  */
 public abstract class CdiApplication extends Application {
 
-    private FxCdiLoader fxCdiLoader;
+    private CDILoader fxCdiLoader;
 
     public CdiApplication() {
 
         super();
 
         // Sets the JavaFX application instance to be used when injecting an instance of this class.
-        FxCdiExtension.setJavaFxApplication(this);
+        JavaFXExtension.setJavaFxApplication(this);
 
         // Searches for a FxCdiLoader instance.
-        final ServiceLoader<FxCdiLoader> serviceLoader = ServiceLoader.load(FxCdiLoader.class);
-        final Iterator<FxCdiLoader> loaderIterator = serviceLoader.iterator();
+        final ServiceLoader<CDILoader> serviceLoader = ServiceLoader.load(CDILoader.class);
+        final Iterator<CDILoader> loaderIterator = serviceLoader.iterator();
         if (!loaderIterator.hasNext()) {
             throw new IllegalStateException("No CDI Loader implementation for JavaFX could be found on your classpath.");
         }
-        final FxCdiLoader loader = loaderIterator.next();
+        final CDILoader loader = loaderIterator.next();
         if (loaderIterator.hasNext()) {
             throw new IllegalStateException("More than one CDI Loader implementation for JavaFX could be found on your classpath.");
         }
@@ -65,7 +64,7 @@ public abstract class CdiApplication extends Application {
     @Override
     public void stop() throws Exception {
         this.fxCdiLoader.shutdown();
-        FxCdiExtension.setJavaFxApplication(null);
+        JavaFXExtension.setJavaFxApplication(null);
         super.stop();
     }
 
