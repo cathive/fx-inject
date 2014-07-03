@@ -33,7 +33,7 @@ limitations under the License.
     <parent>
         <groupId>com.cathive</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>4</version>
+        <version>7</version>
     </parent>
 
     <modules>
