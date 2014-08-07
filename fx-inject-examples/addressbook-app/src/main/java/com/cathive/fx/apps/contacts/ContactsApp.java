@@ -16,30 +16,26 @@
 
 package com.cathive.fx.apps.contacts;
 
-import com.cathive.fx.apps.contacts.model.Company;
-import com.cathive.fx.apps.contacts.model.Person;
 import com.cathive.fx.cdi.CdiApplication;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import java.util.ResourceBundle;
 
 /**
  * Contacts app
  * @author Benjamin P. Jung
  */
+@Named("app")
 public class ContactsApp extends CdiApplication {
 
     @Inject
     private EntityManager entityManager;
-
 
     @Inject
     private RootPane rootPane;

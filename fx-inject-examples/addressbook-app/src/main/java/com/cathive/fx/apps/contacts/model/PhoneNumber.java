@@ -30,8 +30,8 @@ import java.io.Serializable;
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.CHAR)
 @DiscriminatorValue(value = "?")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class PhoneNumber extends AbstractEntity
-                         implements Serializable {
+public abstract class PhoneNumber extends AbstractEntity
+                                  implements Serializable {
 
     /** @see java.io.Serializable */
     private static final long serialVersionUid = 1L;

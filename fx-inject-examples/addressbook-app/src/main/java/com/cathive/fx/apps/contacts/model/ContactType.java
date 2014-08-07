@@ -17,7 +17,7 @@
 package com.cathive.fx.apps.contacts.model;
 
 /**
- * Created by benjamin.jung on 3/27/2014.
+ * @author Benjamin P. Jung
  */
 public enum ContactType {
 

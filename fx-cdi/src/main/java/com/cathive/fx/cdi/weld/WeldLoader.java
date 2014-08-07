@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * CDI loader implementation based on JBoss WELD.
  * @author Benjamin P. Jung
  */
 public class WeldLoader implements CDILoader {

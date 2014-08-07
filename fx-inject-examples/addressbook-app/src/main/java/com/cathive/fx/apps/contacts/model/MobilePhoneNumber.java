@@ -38,7 +38,7 @@ public class MobilePhoneNumber extends PhoneNumber
 
     // <editor-fold desc="Property: national destination code (NDC)">
     public static final String NATIONAL_DESTINATION_CODE_PROPERTY = "nationalDestinationCode";
-    private final StringProperty nationalDestinationCode = new SimpleStringProperty(this. NATIONAL_DESTINATION_CODE_PROPERTY);
+    private final StringProperty nationalDestinationCode = new SimpleStringProperty(this, NATIONAL_DESTINATION_CODE_PROPERTY);
     @Basic
     @Column(name = "ndc")
     public String getNationalDestinationCode() {

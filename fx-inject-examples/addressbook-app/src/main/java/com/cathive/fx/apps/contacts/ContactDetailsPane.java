@@ -31,10 +31,12 @@ import javafx.scene.layout.VBox;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * @author Benjamin P. Jung
  */
+@Named
 @FXMLComponent(location = "ContactDetailsPane.fxml", resources = "com.cathive.fx.apps.contacts.Messages")
 public class ContactDetailsPane extends VBox {
 

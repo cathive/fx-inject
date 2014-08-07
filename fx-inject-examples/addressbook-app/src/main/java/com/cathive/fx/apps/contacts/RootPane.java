@@ -22,7 +22,6 @@ import com.cathive.fx.apps.contacts.model.Family;
 import com.cathive.fx.apps.contacts.model.Person;
 import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
@@ -32,13 +31,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 import javax.annotation.PostConstruct;
-
-import static javafx.beans.binding.Bindings.createBooleanBinding;
+import javax.inject.Named;
 
 /**
  * Root pane
  * @author Benjamin P. Jung
  */
+@Named
 @FXMLComponent(location = "RootPane.fxml", resources = "com.cathive.fx.apps.contacts.Messages")
 public class RootPane extends AnchorPane {
 

@@ -17,22 +17,21 @@
 package com.cathive.fx.apps.contacts;
 
 import com.cathive.fx.apps.contacts.model.Contact;
-import com.cathive.fx.apps.contacts.model.Person;
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
 import javax.enterprise.inject.spi.CDI;
+import javax.inject.Named;
 
 /**
  * List view for contacts.
  * @author Benjamin P. Jung
  */
+@Named
 public class ContactListView extends ListView<Contact> {
 
     private final ObjectProperty<Contact> selectedContact = new SimpleObjectProperty<>(this, "selectedContact");

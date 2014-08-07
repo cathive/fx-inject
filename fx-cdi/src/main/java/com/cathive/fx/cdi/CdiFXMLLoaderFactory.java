@@ -16,39 +16,38 @@
 
 package com.cathive.fx.cdi;
 
-import static com.cathive.fx.cdi.CdiFXMLLoader.CHARSET_UNSPECIFIED;
-import static com.cathive.fx.cdi.CdiFXMLLoader.LOCATION_UNSPECIFIED;
-import static com.cathive.fx.cdi.CdiFXMLLoader.RESOURCES_UNSPECIFIED;
+import com.cathive.fx.inject.core.FXMLLoaderParams;
+import javafx.fxml.FXMLLoader;
 
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ResourceBundle;
 import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ResourceBundle;
 
-import com.cathive.fx.inject.core.FXMLLoaderParams;
-
-import javafx.fxml.FXMLLoader;
+import static com.cathive.fx.cdi.CdiFXMLLoader.*;
 
 /**
  * This factory is responsible for the production of CDI-aware {@link javafx.fxml.FXMLLoader} instances.
  *
  * @author Benjamin P. Jung
- * @since 1.0.0
  */
 class CdiFXMLLoaderFactory {
 
     /**
-     * Create an CDI-aware FXMLLoader.
+     * Create a CDI-aware FXMLLoader.
      * If an annotation of type @FXMLLoaderParams can be found, use it's parameters
      * to configure the FXMLLoader instance that shall be used to perform the loading
      * of the FXML file.
      *
-     * @param fxmlLoader     never <code>null</code>
-     * @param injectionPoint never <code>null</code>
-     * @return the readily instantiated FXMLLoader, never <code>null</code>
+     * @param fxmlLoader
+     *     FXML loader instance to be used.
+     * @param injectionPoint
+     *     Injection point.
+     * @return
+     *     A new FXMLLoader instance.
      */
     @Produces
     @FXMLLoaderParams

@@ -32,8 +32,13 @@ import java.util.ServiceLoader;
  */
 public abstract class CdiApplication extends Application {
 
+    /** CDI loader to be used during application initialization. */
     private CDILoader fxCdiLoader;
 
+    /**
+     * Default constructor.
+     * Creates a new CDI-aware JavaFX application instance.
+     */
     public CdiApplication() {
 
         super();

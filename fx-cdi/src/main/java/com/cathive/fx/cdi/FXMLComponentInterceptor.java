@@ -16,21 +16,19 @@
 
 package com.cathive.fx.cdi;
 
+import com.cathive.fx.inject.core.FXMLComponent;
+import javafx.fxml.FXMLLoader;
+
 import javax.enterprise.inject.spi.CDI;
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-
-import com.cathive.fx.inject.core.FXMLComponent;
-
-import javafx.fxml.FXMLLoader;
 
 /**
  * This factory is responsible for the production of CDI-aware FXML-based custom components that
  * have been annotated as such using the {@link com.cathive.fx.inject.core.FXMLComponent @FXMLComponent} annotation.
  *
  * @author Benjamin P. Jung
- * @since 1.1.0
  */
 @SuppressWarnings("UnusedDeclaration")
 @FXMLComponent

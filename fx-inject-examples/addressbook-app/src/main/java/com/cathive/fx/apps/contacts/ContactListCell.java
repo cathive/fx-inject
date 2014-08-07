@@ -23,19 +23,19 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import java.util.concurrent.Callable;
+import javax.inject.Named;
 
 /**
  * List cell to display contacts.
  * @author Benjamin P. Jung
  */
+@Named
 @Dependent
 @FXMLComponent(location = "ContactListCell.fxml")
 public class ContactListCell extends HBox {
