@@ -30,7 +30,8 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
-import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -38,6 +39,7 @@ import javax.inject.Named;
  * @author Benjamin P. Jung
  */
 @Named
+@Dependent
 @FXMLComponent(location = "RootPane.fxml", resources = "com.cathive.fx.apps.contacts.Messages")
 public class RootPane extends AnchorPane {
 
@@ -49,8 +51,8 @@ public class RootPane extends AnchorPane {
 
     private final ReadOnlyObjectWrapper<Contact> selectedContact = new ReadOnlyObjectWrapper<>(this, "selectedContact");
 
-    @PostConstruct
-    protected void init() {
+    @Inject
+    public void init() {
 
         // TODO Remove this dummy content.
         contactListView.getItems().addAll(

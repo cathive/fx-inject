@@ -19,7 +19,7 @@ package com.cathive.fx.cdi;
 import com.cathive.fx.inject.core.FXMLLoaderParams;
 import javafx.fxml.FXMLLoader;
 
-import javax.enterprise.inject.New;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -34,6 +34,7 @@ import static com.cathive.fx.cdi.CdiFXMLLoader.*;
  *
  * @author Benjamin P. Jung
  */
+@ApplicationScoped
 class CdiFXMLLoaderFactory {
 
     /**
@@ -42,8 +43,6 @@ class CdiFXMLLoaderFactory {
      * to configure the FXMLLoader instance that shall be used to perform the loading
      * of the FXML file.
      *
-     * @param fxmlLoader
-     *     FXML loader instance to be used.
      * @param injectionPoint
      *     Injection point.
      * @return
@@ -51,7 +50,8 @@ class CdiFXMLLoaderFactory {
      */
     @Produces
     @FXMLLoaderParams
-    FXMLLoader createCdiFXMLLoader(@New final CdiFXMLLoader fxmlLoader, final InjectionPoint injectionPoint) {
+    FXMLLoader createCdiFXMLLoader(final InjectionPoint injectionPoint) {
+        final CdiFXMLLoader fxmlLoader = new CdiFXMLLoader();
         final Annotated annotated = injectionPoint.getAnnotated();
         final Class<?> declaringClass = injectionPoint.getMember().getDeclaringClass();
         if (annotated.isAnnotationPresent(FXMLLoaderParams.class)) {
@@ -59,11 +59,10 @@ class CdiFXMLLoaderFactory {
             initializeFXMLLoader(fxmlLoader, declaringClass, annotation.location(), annotation.resources(), annotation.charset());
         }
         return fxmlLoader;
-
     }
 
     /**
-     * Initializes the given FXMLLoader using the provided parameters.
+     * Initializes the given FXMLLoader instance using the provided parameters.
      *
      * @param fxmlLoader  never <code>null</code>
      * @param targetClass never <code>null</code>

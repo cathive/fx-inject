@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -32,6 +33,7 @@ import java.util.ResourceBundle;
  * @author Benjamin P. Jung
  */
 @Named("app")
+@ApplicationScoped
 public class ContactsApp extends CdiApplication {
 
     @Inject

@@ -21,10 +21,8 @@ import javafx.beans.binding.StringBinding;
 import javafx.scene.image.Image;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Produces;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import javax.inject.Singleton;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +34,7 @@ import static javafx.beans.binding.Bindings.createStringBinding;
  * @author Benjamin P. Jung
  */
 @Named
-@Singleton
+@ApplicationScoped
 public class ContactRendererFactory {
 
     /** Logger for this class. */

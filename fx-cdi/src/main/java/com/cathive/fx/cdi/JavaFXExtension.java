@@ -16,36 +16,22 @@
 
 package com.cathive.fx.cdi;
 
+import javafx.application.Application;
+import javafx.application.Platform;
+
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.spi.*;
+import javax.enterprise.util.AnnotationLiteral;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.AfterDeploymentValidation;
-import javax.enterprise.inject.spi.AnnotatedType;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanAttributes;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.BeforeBeanDiscovery;
-import javax.enterprise.inject.spi.BeforeShutdown;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.InjectionTarget;
-import javax.enterprise.inject.spi.PassivationCapable;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessInjectionPoint;
-import javax.enterprise.inject.spi.ProcessInjectionTarget;
-import javax.enterprise.util.AnnotationLiteral;
-
-import javafx.application.Application;
-import javafx.application.Platform;
 
 /**
  * This JavaFX extension makes sure that sub-classes of {@link com.cathive.fx.cdi.CdiApplication} can be
@@ -92,7 +78,7 @@ class JavaFXExtension implements Extension {
 
     public static <T extends CdiApplication> T getJavaFxApplication() {
 
-        final ValueLatch<CdiApplication> latch = new ValueLatch(1);
+        final ValueLatch<CdiApplication> latch = new ValueLatch<>(1);
         Platform.runLater(() -> {
             latch.setValue(JAVA_FX_APPLICATION.get());
             latch.countDown();
@@ -145,7 +131,7 @@ class JavaFXExtension implements Extension {
         final InjectionTarget<CdiApplication> injectionTarget = beanManager.createInjectionTarget(annotatedType);
 
         // Obtains the one (and only) application instance to ever be used.
-        final CdiApplication instance = this.getJavaFxApplication();
+        final CdiApplication instance = getJavaFxApplication();
 
         // Constructs the bean used to provide instances of the JavaFX application instance.
         JAVA_FX_APPLICATION_BEAN = new CdiApplicationBean(instance, beanAttributes, injectionTarget);

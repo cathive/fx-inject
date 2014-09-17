@@ -16,9 +16,9 @@
 
 package com.cathive.fx.apps.contacts;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import java.io.File;
@@ -29,7 +29,7 @@ import java.util.Map;
  * @author Benjamin P. Jung
  */
 @Named
-@Singleton
+@ApplicationScoped
 public class DataStorage {
 
     /** Name of the persistence unit to be used when working with contacts. */

@@ -19,7 +19,6 @@ package com.cathive.fx.cdi;
 import com.cathive.fx.inject.core.FXMLComponent;
 import javafx.fxml.FXMLLoader;
 
-import javax.enterprise.inject.spi.CDI;
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -49,7 +48,7 @@ class FXMLComponentInterceptor {
         if (annotation == null) {
             throw new IllegalStateException(String.format("No @FXMLComponent annotation could be retrieved from class %s.", targetClass.getName()));
         }
-        final FXMLLoader fxmlLoader = CDI.current().select(CdiFXMLLoader.class).get();
+        final FXMLLoader fxmlLoader = new CdiFXMLLoader();
         CdiFXMLLoaderFactory.initializeFXMLLoader(
                 fxmlLoader,
                 targetClass,

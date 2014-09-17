@@ -16,16 +16,16 @@
 
 package com.cathive.fx.apps.contacts;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-import javax.inject.Singleton;
 import java.util.ResourceBundle;
 
 /**
  * @author Benjamin P. Jung
  */
 @Named("messages")
-@Singleton
+@ApplicationScoped
 public class Messages {
 
     public static final String APP_NAME = "app.name";

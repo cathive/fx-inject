@@ -26,6 +26,7 @@ import javax.enterprise.inject.spi.CDI;
  * CDI-aware FXMLLoader
  * @author Benjamin P. Jung
  */
+
 class CdiFXMLLoader extends FXMLLoader {
 
     // Some marker strings for unspecified values.
@@ -50,9 +51,9 @@ class CdiFXMLLoader extends FXMLLoader {
     private final JavaFXBuilderFactory defaultBuilderFactory;
 
     /**
-     * Default (private) constructor.
+     * Default constructor.
      */
-    private CdiFXMLLoader() {
+    CdiFXMLLoader() {
 
         super();
 
