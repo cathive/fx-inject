@@ -16,15 +16,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cathive.fx.inject</groupId>
     <artifactId>fx-inject</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0</version>
     <name>fx-inject</name>
     <description>Dependency Injection with JavaFX</description>
     <url>https://github.com/cathive/fx-cdi/</url>
@@ -73,7 +71,7 @@ limitations under the License.
             <name>Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
-            <comments/>
+            <comments />
         </license>
     </licenses>
 
@@ -110,13 +108,13 @@ limitations under the License.
         </developer>
     </developers>
 
-    <contributors/>
+    <contributors />
 
     <scm>
         <connection>scm:git:https://github.com/cathive/fx-inject.git</connection>
         <developerConnection>scm:git:git@github.com:cathive/fx-inject.git</developerConnection>
         <url>https://github.com/cathive/fx-inject/</url>
-        <tag>master</tag>
+        <tag>v2.0.0</tag>
     </scm>
 
     <ciManagement>
