@@ -1,14 +1,16 @@
 # compiled (binary) files
 a.out
-*.o
-*.mo
 *.class
+*.lib
+*.mo
+*.o
 *.py[co]
+*.so
 
 # Other version control systems
-.hg
-.svn
-CVS
+.hg/
+.svn/
+CVS/
 
 # Mac OSX specific stuff
 .DS_Store
@@ -51,6 +53,9 @@ nbproject/private/
 target/
 build/
 dist/
+
+# Log files
+*.log
 
 # Java Crash Dumps
 hs_err_pid*.log
