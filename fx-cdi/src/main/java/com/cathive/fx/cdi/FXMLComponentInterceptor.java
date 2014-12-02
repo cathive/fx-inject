@@ -16,7 +16,12 @@
 
 package com.cathive.fx.cdi;
 
+import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+
 import com.cathive.fx.inject.core.FXMLComponent;
+
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
 import javax.interceptor.AroundConstruct;
@@ -57,7 +62,23 @@ class FXMLComponentInterceptor {
                 annotation.charset());
         fxmlLoader.setRoot(target);
         fxmlLoader.setController(target);
-        fxmlLoader.load();
+
+        // We now have to perform the actual loading of the FXML document.
+        // ... we have to make sure that this happens on the right (thus: FX application) thread, though!
+        if (Platform.isFxApplicationThread()) {
+            fxmlLoader.load();
+        } else {
+            final CountDownLatch latch = new CountDownLatch(1);
+            Platform.runLater(() -> {
+                try {
+                    final Object loaded = fxmlLoader.load();
+                    latch.countDown();
+                } catch (final IOException e) {
+                    throw new IllegalStateException("Loading of FXML file failed.", e);
+                }
+            });
+            latch.await();
+        }
 
     }
 
